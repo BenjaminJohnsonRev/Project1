@@ -1,6 +1,7 @@
 package org.example.entity;
 
 public class Manager {
+
     private String username;
     private String password;
 
@@ -40,4 +41,5 @@ public class Manager {
     @Override
     public void login(String username, String password) {
     }
+
 }

@@ -1,11 +1,13 @@
 package org.example.entity;
 
 public class Employee {
+
     private String username;
     private String password;
     private int userId;
 
     boolean managerStatus = false;
+
 
     public Employee(String username, String password) {
         this.username = username;
@@ -46,4 +48,5 @@ public class Employee {
     public void login(String username, String password) {
 
     }
+
 }
