@@ -1,5 +1,7 @@
 package org.example.services;
 
+import org.example.menu.InitialMenu;
+
 import java.util.Scanner;
 
 //This is the class that handles checking for valid logins and passes the user to the correct menu.
@@ -9,7 +11,7 @@ public class Login {
     String username;
     String password;
 
-    public void login1(boolean managerCheck){
+    public void login(boolean managerCheck){
 
 
         // could create MenuFactory
