@@ -21,13 +21,13 @@ Due Date: 5-9-22
 
 
 #### User Stories
-- Employees can login to their account. 
-- Employees can register for a new account. 
-- Employees can submit a ticket (with price and description) for reimbursement.
-- Employees can view their past tickets. 
-- Employees can view pending tickets. 
-- Employees can view tickets ordered by date. 
-- Managers can login to their account.
-- Managers can view all pending requests.
-- Managers can view past tickets for all employees in the company.
-- Managers can accept/deny reimbursement requests. 
+- Employees can login to their account. X
+- Employees can register for a new account. X
+- Employees can submit a ticket (with price and description) for reimbursement. X
+- Employees can view their past tickets. X
+- Employees can view pending tickets. X
+- Employees can view tickets ordered by date. X
+- Managers can login to their account. X
+- Managers can view all pending requests. X
+- Managers can view past tickets for all employees in the company. X
+- Managers can accept/deny reimbursement requests. X
