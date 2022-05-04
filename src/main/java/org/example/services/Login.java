@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.entity.Employee;
 import org.example.menu.InitialMenu;
 
 import java.util.Scanner;
@@ -25,6 +26,7 @@ public class Login {
         String username = scanner.nextLine();
         System.out.println("Enter your password: ");
         String password = scanner.nextLine();
+
 
         boolean validLogin = validateLogin(managerCheck, username, password);
 
