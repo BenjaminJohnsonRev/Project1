@@ -1,5 +1,9 @@
 package org.example.entity;
 
+import org.example.dao.DaoFactory;
+import org.example.dao.EmployeeDao;
+import org.example.dao.ManagerDao;
+
 import java.util.Scanner;
 
 //This should be the only place we create "new" users. It also passes users into the data layer.

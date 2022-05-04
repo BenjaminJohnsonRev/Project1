@@ -21,13 +21,13 @@ Due Date: 5-9-22
 
 
 #### User Stories
-- Employees can login to their account. X
-- Employees can register for a new account. X
-- Employees can submit a ticket (with price and description) for reimbursement. X
-- Employees can view their past tickets. X
-- Employees can view pending tickets. X
-- Employees can view tickets ordered by date. X
-- Managers can login to their account. X
-- Managers can view all pending requests. X
-- Managers can view past tickets for all employees in the company. X
-- Managers can accept/deny reimbursement requests. X
+- Employees can login to their account. XX getEmployeeServlet
+- Employees can register for a new account. XX putEmployeeServlet
+- Employees can submit a ticket (with price and description) for reimbursement. XX putTicketServlet
+- Employees can view their past tickets. XX getPastTickets
+- Employees can view pending tickets. XX getPostTickets
+- Employees can view tickets ordered by date. XO DEFAULT FOR BOTH
+- Managers can login to their account. XX getManagerServlet
+- Managers can view all pending requests. XX getManagerPostTickets
+- Managers can view past tickets for all employees in the company. XX getManagerPastTickets
+- Managers can accept/deny reimbursement requests. XX putManagerPostTickets
