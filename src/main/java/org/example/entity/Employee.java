@@ -11,10 +11,11 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee(String username, String password, int accountId) {
+    public Employee(int userId, String username, String password) {
+
         this.username = username;
         this.password = password;
-        this.userId = accountId;
+        this.userId = userId;
     }
 
     public String getUsername() {

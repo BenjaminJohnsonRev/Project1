@@ -22,17 +22,20 @@ public class TicketFactory {
 
         //todo: not actual code
         PostTicketsDao postTicketsDao = DaoFactory.getPostTicketDao();
+
         postTicketsDao.add(ticket);
         System.out.println("Ticket has been posted for review.");
     }
 
     //Takes in post ticket and approves/denies it. Finally, deleting post ticket and adding a past ticket to another table
+
     public static void makeAPastTicket(boolean approval, Ticket postTicket){
 
         int id = postTicket.getTicketId();
         String name = postTicket.getName();
         Double amount = postTicket.getReimbursement();
         String desc = postTicket.getDescription();
+
         Ticket pastTicket;
 
         if(approval) {
@@ -48,4 +51,6 @@ public class TicketFactory {
         pastTicketsDao.add(pastTicket);
         System.out.println("Ticket has successfully reviewed.");
     }
+
 }
+
