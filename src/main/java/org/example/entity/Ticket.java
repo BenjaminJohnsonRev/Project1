@@ -2,32 +2,35 @@ package org.example.entity;
 
 import java.sql.Timestamp;
 
-
-public class PastTicket {
-
+public class Ticket implements Comparable<Ticket>{
     private int ticketId;
     private int userId;
-    private String accepted;
+    private String type;
     private String name;
     private double reimbursement;
     private String description;
     private Timestamp ticketTime;
 
-    public PastTicket(int ticketId, int userId, String accepted, String name, double reimbursement, String description, Timestamp ticketTime) {
+    public Ticket(){
+
+    }
+
+
+    public Ticket(int ticketId, int userId, String type, String name, double reimbursement, String description, Timestamp ticketTime) {
 
         this.ticketId = ticketId;
         this.userId = userId;
-        this.accepted = accepted;
+        this.type = type;
         this.name = name;
         this.reimbursement = reimbursement;
         this.description = description;
         this.ticketTime = ticketTime;
     }
 
-    public PastTicket(int userId, String accepted, String name, double reimbursement, String description) {
+    public Ticket(int userId, String type, String name, double reimbursement, String description) {
 
         this.userId = userId;
-        this.accepted = accepted;
+        this.type = type;
         this.name = name;
         this.reimbursement = reimbursement;
         this.description = description;
@@ -58,11 +61,11 @@ public class PastTicket {
     }
 
     public String getAccepted() {
-        return accepted;
+        return type;
     }
 
-    public void setAccepted(String accepted) {
-        this.accepted = accepted;
+    public void setAccepted(String type) {
+        this.type = type;
     }
 
     public double getReimbursement() {
@@ -91,13 +94,19 @@ public class PastTicket {
 
     @Override
     public String toString() {
-
-        return "Tickets{" +
+        return "PastTicket{" +
                 "ticketId=" + ticketId +
+                ", userId=" + userId +
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
                 ", reimbursement=" + reimbursement +
                 ", description='" + description + '\'' +
                 ", ticketTime=" + ticketTime +
                 '}';
     }
-}
 
+    @Override
+    public int compareTo(Ticket o) {
+        return this.ticketTime.compareTo(o.ticketTime);
+    }
+}

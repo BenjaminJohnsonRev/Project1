@@ -2,7 +2,9 @@ package org.example.entity;
 
 import java.sql.Timestamp;
 
+
 public class PostTicket {
+
     private int ticketId;
     private int userId;
     private String name;
@@ -11,6 +13,7 @@ public class PostTicket {
     private Timestamp ticketTime;
 
     public PostTicket(int ticketId, int userId, String name, double reimbursement, String description, Timestamp ticketTime) {
+
         this.ticketId = ticketId;
         this.userId = userId;
         this.name = name;
@@ -85,4 +88,6 @@ public class PostTicket {
                 ", ticketTime=" + ticketTime +
                 '}';
     }
+
 }
+
