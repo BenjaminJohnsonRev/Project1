@@ -17,28 +17,28 @@ public class TicketFactory {
         System.out.println("Enter reimbursement description: ");
         String desc = scanner.nextLine();
 
-        PostTicket postTicket = new PostTicket(id ,name, amount, desc);
+        Ticket ticket = new Ticket(id, "ticketPending", name, amount, desc);
 
 
         //todo: not actual code
         PostTicketsDao postTicketsDao = DaoFactory.getPostTicketDao();
-        postTicketsDao.add(postTicket);
+        postTicketsDao.add(ticket);
         System.out.println("Ticket has been posted for review.");
     }
 
     //Takes in post ticket and approves/denies it. Finally, deleting post ticket and adding a past ticket to another table
-    public static void makePastTicket(boolean approval, PostTicket postTicket){
+    public static void makeAPastTicket(boolean approval, Ticket postTicket){
 
         int id = postTicket.getTicketId();
         String name = postTicket.getName();
         Double amount = postTicket.getReimbursement();
         String desc = postTicket.getDescription();
-        PastTicket pastTicket;
+        Ticket pastTicket;
 
         if(approval) {
-            pastTicket = new PastTicket(id, "ticketApproved", name, amount, desc);
+            pastTicket = new Ticket(id, "ticketApproved", name, amount, desc);
         } else {
-            pastTicket = new PastTicket(id, "ticketDenied", name, amount, desc);
+            pastTicket = new Ticket(id, "ticketDenied", name, amount, desc);
         }
 
         //todo: not actual code

@@ -1,18 +1,17 @@
 package org.example.entity;
 
 public class Employee {
+
     private String username;
     private String password;
     private int userId;
-
-    boolean managerStatus = false;
 
     public Employee(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public Employee(String username, String password, int accountId) {
+    public Employee(int accountId, String username, String password) {
         this.username = username;
         this.password = password;
         this.userId = accountId;
@@ -43,7 +42,11 @@ public class Employee {
     }
 
     @Override
-    public void login(String username, String password) {
-
+    public String toString() {
+        return "Employee{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userId=" + userId +
+                '}';
     }
 }

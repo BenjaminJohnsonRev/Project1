@@ -1,10 +1,9 @@
 package org.example.entity;
 
 public class Manager {
+    
     private String username;
     private String password;
-
-    boolean managerStatus = true;
 
     public Manager(String username, String password) {
         this.username = username;
@@ -27,17 +26,11 @@ public class Manager {
         this.password = password;
     }
 
-    public boolean isManagerStatus() {
-        return managerStatus;
-    }
-
-    public void setManagerStatus(boolean managerStatus) {
-        this.managerStatus = managerStatus;
-    }
-
-
-
     @Override
-    public void login(String username, String password) {
+    public String toString() {
+        return "Manager{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

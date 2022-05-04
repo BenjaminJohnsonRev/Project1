@@ -1,14 +1,17 @@
 package org.example.services;
 
+import org.example.menu.InitialMenu;
+
 import java.util.Scanner;
 
-//This is the class that handles
+//This is the class that handles checking for valid logins and passes the user to the correct menu.
 
 public class Login {
+
     String username;
     String password;
 
-    public void login1(boolean managerCheck){
+    public void login(boolean managerCheck){
 
 
         // could create MenuFactory
@@ -23,13 +26,13 @@ public class Login {
         System.out.println("Enter your password: ");
         String password = scanner.nextLine();
 
-        boolean validLogin = validateLogin(employeeCheck, username, password);
+        boolean validLogin = validateLogin(managerCheck, username, password);
 
         if(validLogin){
             if(managerCheck){
-                employeeMenu.menu();
+                managerMenu.menu();
             } else{
-                User employee = new Employee(username, password);
+                Employee employee = new Employee(username, password);
                 employeeMenu.menu(employee);
             }
         }
@@ -38,13 +41,13 @@ public class Login {
     public static boolean validateLogin(boolean managerCheck, String username, String password){
 
         if (managerCheck){
-            //getemployeename and getemployeepassword from employee table
+            //getmanagername and getmanagerpassword from manager table
 
-            ManagerDao employeeDao = DaoFactory.getManagerDao();
-            Manager employee = employeeDao.getManagerByUsername(username);
-            //System.out.println("Here is the employee: " + employee.toString());
+            ManagerDao managerDao = DaoFactory.getManagerDao();
+            Manager manager = managerDao.getManagerByUsername(username);
+            //System.out.println("Here is the manager: " + manager.toString());
 
-            if(employee.getUsername().equals(username) && employee.getPassword().equals(password)){
+            if(manager.getUsername().equals(username) && manager.getPassword().equals(password)){
                 return true;
             } else {
                 System.out.println("Your username and password were invalid, please try again.");

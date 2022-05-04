@@ -2,30 +2,35 @@ package org.example.entity;
 
 import java.sql.Timestamp;
 
-public class PostTicket{
+public class Ticket implements Comparable<Ticket>{
     private int ticketId;
     private int userId;
+    private String type;
     private String name;
     private double reimbursement;
     private String description;
     private Timestamp ticketTime;
 
-    public PostTicket(){}
+    public Ticket(){
+
+    }
 
 
-    public PostTicket(int ticketId, int userId, String name, double reimbursement, String description, Timestamp ticketTime) {
+    public Ticket(int ticketId, int userId, String type, String name, double reimbursement, String description, Timestamp ticketTime) {
 
-        super();
         this.ticketId = ticketId;
         this.userId = userId;
+        this.type = type;
         this.name = name;
         this.reimbursement = reimbursement;
         this.description = description;
         this.ticketTime = ticketTime;
     }
 
-    public PostTicket(int userId, String name, double reimbursement, String description) {
+    public Ticket(int userId, String type, String name, double reimbursement, String description) {
+
         this.userId = userId;
+        this.type = type;
         this.name = name;
         this.reimbursement = reimbursement;
         this.description = description;
@@ -55,6 +60,14 @@ public class PostTicket{
         this.ticketId = ticketId;
     }
 
+    public String getAccepted() {
+        return type;
+    }
+
+    public void setAccepted(String type) {
+        this.type = type;
+    }
+
     public double getReimbursement() {
         return reimbursement;
     }
@@ -81,13 +94,19 @@ public class PostTicket{
 
     @Override
     public String toString() {
-        return "PostTickets{" +
+        return "PastTicket{" +
                 "ticketId=" + ticketId +
                 ", userId=" + userId +
+                ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", reimbursement=" + reimbursement +
                 ", description='" + description + '\'' +
                 ", ticketTime=" + ticketTime +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Ticket o) {
+        return this.ticketTime.compareTo(o.ticketTime);
     }
 }

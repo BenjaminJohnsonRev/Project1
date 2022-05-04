@@ -2,7 +2,7 @@ package org.example.entity;
 
 import java.sql.Timestamp;
 
-public class PastTicket {
+public class PastTicket{
     private int ticketId;
     private int userId;
     private String accepted;
@@ -11,7 +11,13 @@ public class PastTicket {
     private String description;
     private Timestamp ticketTime;
 
+    public PastTicket(){
+
+    }
+
+
     public PastTicket(int ticketId, int userId, String accepted, String name, double reimbursement, String description, Timestamp ticketTime) {
+        super();
         this.ticketId = ticketId;
         this.userId = userId;
         this.accepted = accepted;
@@ -22,6 +28,7 @@ public class PastTicket {
     }
 
     public PastTicket(int userId, String accepted, String name, double reimbursement, String description) {
+        super();
         this.userId = userId;
         this.accepted = accepted;
         this.name = name;
@@ -87,8 +94,11 @@ public class PastTicket {
 
     @Override
     public String toString() {
-        return "Tickets{" +
+        return "PastTicket{" +
                 "ticketId=" + ticketId +
+                ", userId=" + userId +
+                ", accepted='" + accepted + '\'' +
+                ", name='" + name + '\'' +
                 ", reimbursement=" + reimbursement +
                 ", description='" + description + '\'' +
                 ", ticketTime=" + ticketTime +

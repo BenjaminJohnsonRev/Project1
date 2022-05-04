@@ -2,10 +2,13 @@ package org.example.entity;
 
 import java.util.Scanner;
 
-public class UserFactory {
-    EmployeeDaoImpl employeeDao;
+//This should be the only place we create "new" users. It also passes users into the data layer.
 
-    public static void makeNewUser(boolean employeeStatus){
+public class UserFactory {
+
+    ManagerDaoImpl managerDao;
+
+    public static void makeNewUser(boolean managerStatus){
 
         Scanner scanner = new Scanner(System.in);
 
@@ -19,25 +22,25 @@ public class UserFactory {
         String passwordConfirm = scanner.nextLine();
 
         if(password.equals(passwordConfirm)){
-            if (employeeStatus){
-                Employee employee = new Employee(username, password);
+            if (managerStatus){
+                Manager manager = new Manager(username, password);
 
-                System.out.println("New employee account created.");
+                System.out.println("New manager account created.");
+
+                ManagerDao managerDao = DaoFactory.getManagerDao();
+
+            } else {
+                Employee employee = new Employee(username, password);
 
                 EmployeeDao employeeDao = DaoFactory.getEmployeeDao();
 
-            } else {
-                Customer customer = new Customer(username, password);
+                employeeDao.insert(employee);
 
-                CustomerDao customerDao = DaoFactory.getCustomerDao();
-
-                customerDao.insert(customer);
-
-                System.out.println("New customer account created. Log in to continue. ");
+                System.out.println("New employee account created. Log in to continue. ");
             }
         } else {
             System.out.println("Password does not match. ");
-            makeNewUser(employeeStatus);
+            makeNewUser(managerStatus);
         }
 
     }
