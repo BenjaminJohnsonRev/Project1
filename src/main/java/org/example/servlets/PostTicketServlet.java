@@ -1,6 +1,8 @@
 package org.example.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.dao.DaoFactory;
+import org.example.dao.PostTicketDao;
 import org.example.entity.Ticket;
 
 import javax.servlet.ServletException;
@@ -13,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class PostTicketServlet extends HttpServlet {
-    PostTicketDao postTicketDao = new PostTicketDao();
+    PostTicketDao postTicketDao = DaoFactory.getPostTicketDao();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out =  resp.getWriter();
@@ -31,7 +33,7 @@ public class PostTicketServlet extends HttpServlet {
         }
         //todo Rory had services here, so we can replace dao with that if needed
         
-        List<Ticket> postTickets = postTicketDao.getTicketsById(employeeId);
+        List<Ticket> postTickets = postTicketDao.getAllByUserId(employeeId);
         Collections.sort(postTickets);
         out.println(postTickets);
     }
@@ -41,7 +43,7 @@ public class PostTicketServlet extends HttpServlet {
         try{
             ObjectMapper mapper = new ObjectMapper();
             Ticket payload = mapper.readValue(req.getInputStream(), Ticket.class);
-            postTicketDao.add(payload);
+            postTicketDao.insert(payload);
             resp.setStatus(203);
         }catch (IOException e){
             resp.setStatus(500);

@@ -1,5 +1,9 @@
 package org.example.entity;
 
+import org.example.dao.DaoFactory;
+import org.example.dao.PastTicketDao;
+import org.example.dao.PostTicketDao;
+
 import java.util.Scanner;
 
 public class TicketFactory {
@@ -21,9 +25,9 @@ public class TicketFactory {
 
 
         //todo: not actual code
-        PostTicketsDao postTicketsDao = DaoFactory.getPostTicketDao();
+        PostTicketDao postTicketsDao = DaoFactory.getPostTicketDao();
 
-        postTicketsDao.add(ticket);
+        postTicketsDao.insert(ticket);
         System.out.println("Ticket has been posted for review.");
     }
 
@@ -45,10 +49,10 @@ public class TicketFactory {
         }
 
         //todo: not actual code
-        PostTicketsDao postTicketsDao = DaoFactory.getPostTicketDao();
-        PastTicketsDao pastTicketsDao = DaoFactory.getPastTicketDao();
+        PostTicketDao postTicketsDao = DaoFactory.getPostTicketDao();
+        PastTicketDao pastTicketsDao = DaoFactory.getPastTicketDao();
         postTicketsDao.delete(postTicket);
-        pastTicketsDao.add(pastTicket);
+        pastTicketsDao.insert(pastTicket);
         System.out.println("Ticket has successfully reviewed.");
     }
 

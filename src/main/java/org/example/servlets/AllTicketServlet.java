@@ -1,5 +1,8 @@
 package org.example.servlets;
 
+import org.example.dao.DaoFactory;
+import org.example.dao.PastTicketDao;
+import org.example.dao.PostTicketDao;
 import org.example.entity.Ticket;
 
 import javax.servlet.ServletException;
@@ -12,8 +15,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class AllTicketServlet extends HttpServlet {
-    PastTicketDao pastTicketDao = new PastTicketDao();
-    PostTicketDao postTicketDao = new PostTicketDao();
+    PastTicketDao pastTicketDao = DaoFactory.getPastTicketDao();
+    PostTicketDao postTicketDao = DaoFactory.getPostTicketDao();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out =  resp.getWriter();
@@ -32,8 +35,8 @@ public class AllTicketServlet extends HttpServlet {
             return;
         }
 
-        List<Ticket> postTickets = postTicketDao.getTicketsbyId(employeeId);
-        List<Ticket> pastTickets = pastTicketDao.getTicketsbyId(employeeId);
+        List<Ticket> postTickets = postTicketDao.getAllByUserId(employeeId);
+        List<Ticket> pastTickets = pastTicketDao.getAllByUserId(employeeId);
         pastTickets.addAll(postTickets);
         Collections.sort(pastTickets);
         out.println(pastTickets);

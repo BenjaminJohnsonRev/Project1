@@ -3,6 +3,7 @@ package org.example.entity;
 import org.example.dao.DaoFactory;
 import org.example.dao.EmployeeDao;
 import org.example.dao.ManagerDao;
+import org.example.dao.ManagerDaoImpl;
 
 import java.util.Scanner;
 

@@ -1,9 +1,12 @@
 package org.example.menu;
 
+import org.example.entity.Employee;
+import org.example.services.EmployeeServices;
+
 import java.util.Scanner;
 
 public class EmployeeMenu implements Menu {
-    EmployeeService employeeService = new EmployeeService();
+    EmployeeServices employeeServices = new EmployeeServices();
     InitialMenu initialMenu = new InitialMenu();
 
     public void menu(Employee employee){
@@ -24,25 +27,25 @@ public class EmployeeMenu implements Menu {
         int choice = scanner.nextInt();
         switch(choice) {
             case 1:
-                employeeService.applyForAccount();
+                employeeServices.applyForAccount();
                 break;
             case 2:
-                employeeService.viewAccount();
+                employeeServices.viewAccount();
                 break;
             case 3:
-                employeeService.viewMyAccounts(employee);
+                employeeServices.viewMyAccounts(employee);
                 break;
             case 4:
-                employeeService.withdrawMoney(employee);
+                employeeServices.withdrawMoney(employee);
                 break;
             case 5:
-                employeeService.depositMoney(employee);
+                employeeServices.depositMoney(employee);
                 break;
             case 6:
-                employeeService.postReceive(employee);
+                employeeServices.postReceive(employee);
                 break;
             case 7:
-                employeeService.postTransfer(employee);
+                employeeServices.postTransfer(employee);
                 break;
             case 8:
                 System.out.println("You are logged out. Have a nice day!");

@@ -4,6 +4,8 @@ import org.example.services.Login;
 
 import java.util.Scanner;
 
+import static org.example.entity.UserFactory.makeNewUser;
+
 //This is the first menu that users should see
 
 public class InitialMenu implements Menu {

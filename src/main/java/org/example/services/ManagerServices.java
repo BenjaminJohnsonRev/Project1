@@ -1,6 +1,9 @@
 package org.example.services;
 
+import org.example.dao.DaoFactory;
+import org.example.dao.PostTicketDao;
 import org.example.entity.PostTicket;
+import org.example.entity.Ticket;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +15,7 @@ public class ManagerServices {
 
     public void viewPostTickets(){
 
-        System.out.println(postTicketDao.getAllPostTickets());
+        System.out.println(postTicketDao.getAll());
     }
 
     public void confirmTicket(){
@@ -20,7 +23,7 @@ public class ManagerServices {
         Scanner scanner = new Scanner(System.in);
         int ticketid = scanner.nextInt();
 
-        PostTicket postTicket = postTicketDao.getTicketById(ticketid);
+        Ticket postTicket = postTicketDao.getByTicketId(ticketid);
 
         makePastTicket(true, postTicket);
     }
@@ -30,7 +33,7 @@ public class ManagerServices {
         Scanner scanner = new Scanner(System.in);
         int id = scanner.nextInt();
 
-        PostTicket postTicket = postTicketsDao.getTicketById(id);
+        Ticket postTicket = postTicketsDao.getTicketById(id);
 
         makePastTicket(false, postTicket);
     }
