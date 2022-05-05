@@ -45,7 +45,7 @@ public class ManagerDaoImpl implements ManagerDao {
 
     @Override
     public Manager getManagerByCredentials(String username, String password) {
-        String sql = "select * from manager where username = ?, password = ?;";
+        String sql = "select * from manager where username = ? AND password = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             // set the id using the id that we passed in:

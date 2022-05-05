@@ -6,6 +6,10 @@ public class Employee {
     private String password;
     private int userId;
 
+    public Employee(){
+
+    }
+
     public Employee(String username, String password) {
         this.username = username;
         this.password = password;
