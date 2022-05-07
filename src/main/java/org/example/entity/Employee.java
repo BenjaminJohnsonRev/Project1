@@ -6,7 +6,9 @@ public class Employee {
     private String password;
     private int userid;
 
-    public Employee(){}
+    public Employee(){
+
+    }
 
     public Employee(String username, String password) {
         this.username = username;
@@ -40,16 +42,16 @@ public class Employee {
         return userid;
     }
 
-    public void setUserId(int userid) {
-        this.userid = userid;
-    }
+//    public void setUserId(int userid) {
+//        this.userid = userid;
+//    }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "userid=" + userid + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", userId=" + userid +
                 '}';
     }
 }

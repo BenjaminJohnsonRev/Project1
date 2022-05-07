@@ -7,7 +7,6 @@
   <groupId>org.example</groupId>
   <artifactId>Project1</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>war</packaging>
 
   <name>Project1</name>
   <!-- FIXME change it to the project's website -->
@@ -35,6 +34,21 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>4.5.1</version>
+      <scope>test</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.194</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -48,12 +62,12 @@
       <artifactId>postgresql</artifactId>
       <version>42.3.4</version>
     </dependency>
-      <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter</artifactId>
-          <version>RELEASE</version>
-          <scope>test</scope>
-      </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.8.2</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>

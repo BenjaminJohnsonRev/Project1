@@ -42,7 +42,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeByCredentials(String username, String password) {
-        String sql = "select * from employee where username = ? and password = ?;";
+        String sql = "select * from employee where username = ? AND password = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             // set the id using the id that we passed in:
@@ -81,18 +81,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return null;
     }
 
-    public Employee getEmployee(ResultSet resultSet) {
-        try {
-            int userId = resultSet.getInt("userid");
-            String username = resultSet.getString("username");
-            String password = resultSet.getString("password");
-            return new Employee(userId, username, password);
-        } catch(SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
+    // we need this method if we're using an h2 database, keep in mind that our database gets "reset" every time, we run the program
     @Override
     public void initTables() {
         // we don't see any ? placeholders because this statement will be the same every time
@@ -120,5 +109,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
         } catch(SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public Employee getEmployee(ResultSet resultSet) {
+        try {
+            int userid = resultSet.getInt("userid");
+            String username = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            return new Employee(userid, username, password);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -7,6 +7,7 @@ import org.example.entity.Employee;
 import org.example.services.Login;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,17 +18,17 @@ public class EmployeeServlet extends HttpServlet {
     private EmployeeDao employeeDao = DaoFactory.getEmployeeDao();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out =  resp.getWriter();
         try{
             ObjectMapper mapper = new ObjectMapper();
-            Employee payload = mapper.readValue(req.getInputStream(), Employee.class);
+            Employee payload = mapper.readValue(req.getReader(), Employee.class);
 
-            //todo not actual login
-            boolean check =  Login.validateLogin(false, payload.getUsername(), payload.getPassword());
-            if(check) out.println("Welcome, " + payload.getUsername());
-            else out.println("Username or password is incorrect");
+            Login.validateLogin(false, payload.getUsername(), payload.getPassword());
 
+            Employee result = employeeDao.getEmployeeByCredentials(payload.getUsername(),payload.getPassword());
+            PrintWriter out = resp.getWriter();
+            out.write(result.toString());
 
+            //System.out.println(result);
             resp.setStatus(203);
         }catch (IOException e){
             resp.setStatus(500);
@@ -39,10 +40,15 @@ public class EmployeeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
             ObjectMapper mapper = new ObjectMapper();
-            Employee payload = mapper.readValue(req.getInputStream(), Employee.class);
+            Employee payload = mapper.readValue(req.getReader(), Employee.class);
+            System.out.println("Here 2!");
 
-            //todo
             employeeDao.insert(payload);
+            //accepts username and password
+            Employee result = employeeDao.getEmployeeByCredentials(payload.getUsername(), payload.getPassword());
+            PrintWriter out = resp.getWriter();
+            out.write(result.toString());
+            System.out.println(result);
 
             resp.setStatus(203);
         }catch (IOException e){

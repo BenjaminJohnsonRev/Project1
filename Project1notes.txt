@@ -15,25 +15,26 @@ check if get all works for ordered by date
 
 time budget:
 do before weekend-
-non-data layer 3 hours~
+non-data layer 3 hours~ X
 code review previous project 1 hour~ X
-pre-postman data layer 2 hours~
-new technology 2 hours per technology~
-tests 2 hours~
+pre-postman data layer 2 hours~ X
+new technology 2 hours per technology~ X
+tests 2 hours~ !!
 do next weekend-
-debugging 4 hours~
+debugging 4 hours~  !!
 
 splitting up work:
 Ben does users X
 Haruya does tickets X
 
 by Thursday after class:
-setup Tomcat on both branches
-Ben does non data layer + data layer
-Haruya does servlet stuff
-figure out sorting for dates
+setup Tomcat on both branches X
+Ben does non data layer + data layer X
+Haruya does servlet stuff X
+custom data structures !!
+figure out sorting for dates !!
 
 Wednesday after class:
-1 hour classwork review
+1 hour classwork review X
 
 
