@@ -69,7 +69,9 @@ public class Login {
             //System.out.println("Here is the employee: " + employee.toString());
 
             if(employee.getUsername().equals(username) && employee.getPassword().equals(password)){
+                System.out.println("valid login!");
                 return true;
+
             } else {
                 System.out.println("Your username and password were invalid, please try again.");
                 return false;

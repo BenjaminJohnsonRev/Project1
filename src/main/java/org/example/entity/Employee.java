@@ -4,7 +4,7 @@ public class Employee {
 
     private String username;
     private String password;
-    private int userId;
+    private int userid;
 
     public Employee(){
 
@@ -15,11 +15,11 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee(int userId, String username, String password) {
+    public Employee(int userid, String username, String password) {
 
         this.username = username;
         this.password = password;
-        this.userId = userId;
+        this.userid = userid;
     }
 
     public String getUsername() {
@@ -39,19 +39,19 @@ public class Employee {
     }
 
     public int getUserId() {
-        return userId;
+        return userid;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+//    public void setUserId(int userid) {
+//        this.userid = userid;
+//    }
 
     @Override
     public String toString() {
         return "Employee{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", userId=" + userId +
+                ", userId=" + userid +
                 '}';
     }
 }
