@@ -18,6 +18,11 @@ public class ConnectionFactory {
         if(connection == null) {
             // if we don't have a connection yet, we can create one:
             // access these values from outside of this file (dbConfig.properties)
+            try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             ResourceBundle bundle = ResourceBundle.getBundle("dbConfig");
             //jdbc:sqlserver://<server_name>:<port>
             String url = bundle.getString("url");

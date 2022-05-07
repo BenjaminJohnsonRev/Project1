@@ -1,7 +1,13 @@
 package org.example.services;
 
+import org.example.dao.DaoFactory;
+import org.example.dao.EmployeeDao;
+import org.example.dao.ManagerDao;
 import org.example.entity.Employee;
-import org.example.menu.InitialMenu;
+import org.example.entity.Manager;
+//import org.example.menu.EmployeeMenu;
+//import org.example.menu.InitialMenu;
+//import org.example.menu.ManagerMenu;
 
 import java.util.Scanner;
 
@@ -12,33 +18,33 @@ public class Login {
     String username;
     String password;
 
-    public void login(boolean managerCheck){
-
-
-        // could create MenuFactory
-        InitialMenu initialMenu = new InitialMenu();
-        EmployeeMenu employeeMenu = new EmployeeMenu();
-        ManagerMenu managerMenu = new ManagerMenu();
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter your username: ");
-        String username = scanner.nextLine();
-        System.out.println("Enter your password: ");
-        String password = scanner.nextLine();
-
-
-        boolean validLogin = validateLogin(managerCheck, username, password);
-
-        if(validLogin){
-            if(managerCheck){
-                managerMenu.menu();
-            } else{
-                Employee employee = new Employee(username, password);
-                employeeMenu.menu(employee);
-            }
-        }
-    }
+//    public void login(boolean managerCheck){
+//
+//
+//        // could create MenuFactory
+//        InitialMenu initialMenu = new InitialMenu();
+//        EmployeeMenu employeeMenu = new EmployeeMenu();
+//        ManagerMenu managerMenu = new ManagerMenu();
+//
+//        Scanner scanner = new Scanner(System.in);
+//
+//        System.out.println("Enter your username: ");
+//        String username = scanner.nextLine();
+//        System.out.println("Enter your password: ");
+//        String password = scanner.nextLine();
+//
+//
+//        boolean validLogin = validateLogin(managerCheck, username, password);
+//
+//        if(validLogin){
+//            if(managerCheck){
+//                managerMenu.menu();
+//            } else{
+//                Employee employee = new Employee(username, password);
+//                employeeMenu.menu(employee);
+//            }
+//        }
+//    }
 
     public static boolean validateLogin(boolean managerCheck, String username, String password){
 
@@ -46,7 +52,7 @@ public class Login {
             //getmanagername and getmanagerpassword from manager table
 
             ManagerDao managerDao = DaoFactory.getManagerDao();
-            Manager manager = managerDao.getManagerByUsername(username);
+            Manager manager = managerDao.getManagerByCredentials(username,password);
             //System.out.println("Here is the manager: " + manager.toString());
 
             if(manager.getUsername().equals(username) && manager.getPassword().equals(password)){
@@ -60,7 +66,7 @@ public class Login {
             //getemployeename and getemployeepassword from employee table
 
             EmployeeDao employeeDao = DaoFactory.getEmployeeDao();
-            Employee employee = employeeDao.getEmployeeByUsername(username);
+            Employee employee = employeeDao.getEmployeeByCredentials(username,password);
             //System.out.println("Here is the employee: " + employee.toString());
 
             if(employee.getUsername().equals(username) && employee.getPassword().equals(password)){

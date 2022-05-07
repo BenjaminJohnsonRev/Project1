@@ -45,7 +45,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeByCredentials(String username, String password) {
-        String sql = "select * from employee where username = ?, password = ?;";
+        String sql = "select * from employee where username = ? and password = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             // set the id using the id that we passed in:

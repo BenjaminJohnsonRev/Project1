@@ -1,5 +1,7 @@
 package org.example.dao;
 
+import org.example.customLists.CustomArrayList;
+import org.example.customLists.CustomList;
 import org.example.entity.Manager;
 import org.example.entity.PastTicket;
 import org.example.entity.PostTicket;
@@ -79,9 +81,9 @@ public class PastTicketDaoImpl implements PastTicketDao{
     }
 
     @Override
-    public List<Ticket> getAll() {
+    public CustomList<Ticket> getAll() {
         // create a list of accounts to store our results:
-        List<Ticket> pastTickets = new ArrayList<>();
+        CustomList<Ticket> pastTickets = new CustomArrayList<Ticket>();
         String sql = "select * from pastticket;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -100,9 +102,9 @@ public class PastTicketDaoImpl implements PastTicketDao{
     }
 
     @Override
-    public List<Ticket> getAllByUserId(int userId) {
+    public CustomList<Ticket> getAllByUserId(int userId) {
         // create a list of accounts to store our results:
-        List<Ticket> pastTickets = new ArrayList<>();
+        CustomList<Ticket> pastTickets = new CustomArrayList<>();
         String sql = "select * from pastticket where userid = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
