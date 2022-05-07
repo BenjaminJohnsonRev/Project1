@@ -36,8 +36,7 @@ public class PostTicketServlet extends HttpServlet {
         //todo Rory had services here, so we can replace dao with that if needed
         
         CustomList<Ticket> postTickets = postTicketDao.getAllByUserId(employeeId);
-        CustomSort cs = new CustomSort();
-        cs.sort(postTickets);
+        CustomSort.sort(postTickets);
         out.println(postTickets);
     }
 

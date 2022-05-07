@@ -15,28 +15,48 @@ public class ConnectionFactory {
 
     // this method will return a connection the SQL
     public static Connection getConnection() {
-        if(connection == null) {
-            // if we don't have a connection yet, we can create one:
-            // access these values from outside of this file (dbConfig.properties)
-            try {
-                Class.forName("org.postgresql.Driver");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            ResourceBundle bundle = ResourceBundle.getBundle("dbConfig");
-            //jdbc:sqlserver://<server_name>:<port>
-            String url = bundle.getString("url");
-            String username = bundle.getString("username");
-            String password = bundle.getString("password");
 
-            try {
-                connection = DriverManager.getConnection(url, username, password);
-            } catch (SQLException e) {
-                System.out.println("Something went wrong when creating the connection!");
-                e.printStackTrace();
+        //boolean switch for h2 database that we use for testing
+        boolean test = false;
+        if(test) {
+            // if we don't have a connection yet, we can create one:
+            if(connection == null) {
+                try {
+                    Class.forName ("org.h2.Driver");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    connection = DriverManager.getConnection ("jdbc:h2:~/test", "sa","");
+                } catch (SQLException e) {
+                    System.out.println("Something went wrong when creating the connection!");
+                    e.printStackTrace();
+                }
+            }
+
+        } else {
+            if(connection == null) {
+                // if we don't have a connection yet, we can create one:
+                try {
+                    Class.forName("org.postgresql.Driver");
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                // access these values from outside of this file (dbConfig.properties)
+                ResourceBundle bundle = ResourceBundle.getBundle("dbConfig");
+                //jdbc:sqlserver://<server_name>:<port>
+                String url = bundle.getString("url");
+                String username = bundle.getString("username");
+                String password = bundle.getString("password");
+
+                try {
+                    connection = DriverManager.getConnection(url, username, password);
+                } catch (SQLException e) {
+                    System.out.println("Something went wrong when creating the connection!");
+                    e.printStackTrace();
+                }
             }
         }
         return connection;
     }
-
 }

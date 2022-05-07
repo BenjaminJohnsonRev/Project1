@@ -35,24 +35,24 @@ public class TicketFactory {
 
     public static void makeAPastTicket(boolean approval, Ticket postTicket){
 
-        int id = postTicket.getTicketId();
+        int userid = postTicket.getUserId();
         String name = postTicket.getName();
-        Double amount = postTicket.getReimbursement();
+        double amount = postTicket.getReimbursement();
         String desc = postTicket.getDescription();
 
         Ticket pastTicket;
 
         if(approval) {
-            pastTicket = new Ticket(id, "ticketApproved", name, amount, desc);
+            pastTicket = new Ticket(userid, "ticketApproved", name, amount, desc);
         } else {
-            pastTicket = new Ticket(id, "ticketDenied", name, amount, desc);
+            pastTicket = new Ticket(userid, "ticketDenied", name, amount, desc);
         }
 
         //todo: not actual code
         PostTicketDao postTicketsDao = DaoFactory.getPostTicketDao();
         PastTicketDao pastTicketsDao = DaoFactory.getPastTicketDao();
-        postTicketsDao.delete(postTicket);
         pastTicketsDao.insert(pastTicket);
+        postTicketsDao.delete(postTicket);
         System.out.println("Ticket has successfully reviewed.");
     }
 

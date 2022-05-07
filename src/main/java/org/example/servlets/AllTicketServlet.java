@@ -24,13 +24,13 @@ public class AllTicketServlet extends HttpServlet {
         PrintWriter out =  resp.getWriter();
         int employeeId;
         try {
-            employeeId = Integer.parseInt((req.getParameter("userId")));
+            employeeId = Integer.parseInt((req.getParameter("id")));
         } catch (NumberFormatException e) {
             //e.printStackTrace();
             CustomList<Ticket> postTickets = postTicketDao.getAll();
             CustomList<Ticket> pastTickets = pastTicketDao.getAll();
             pastTickets.addAll(postTickets);
-            out.println("All Books:");
+            out.println("All Tickets:");
             for(int i = 0; i < pastTickets.length(); i++) {
                 out.println(pastTickets.get(i));
             }
@@ -40,9 +40,10 @@ public class AllTicketServlet extends HttpServlet {
         CustomList<Ticket> postTickets = postTicketDao.getAllByUserId(employeeId);
         CustomList<Ticket> pastTickets = pastTicketDao.getAllByUserId(employeeId);
         pastTickets.addAll(postTickets);
-        CustomSort cs= new CustomSort();
-        cs.sort(pastTickets);
-        out.println(pastTickets);
+        CustomSort.sort(pastTickets);
+        for(int i = 0; i < pastTickets.length(); i++) {
+            out.println(pastTickets.get(i));
+        }
 
     }
 

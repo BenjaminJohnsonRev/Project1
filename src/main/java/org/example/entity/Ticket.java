@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Ticket implements Comparable<Ticket>{
     private int ticketId;
     private int userId;
-    private String accepted;
+    private String status;
     private String name;
     private double reimbursement;
     private String description;
@@ -16,21 +16,21 @@ public class Ticket implements Comparable<Ticket>{
     }
 
 
-    public Ticket(int ticketId, int userId, String accepted, String name, double reimbursement, String description, Timestamp ticketTime) {
+    public Ticket(int ticketId, int userId, String status, String name, double reimbursement, String description, Timestamp ticketTime) {
 
         this.ticketId = ticketId;
         this.userId = userId;
-        this.accepted = accepted;
+        this.status = status;
         this.name = name;
         this.reimbursement = reimbursement;
         this.description = description;
         this.ticketTime = ticketTime;
     }
 
-    public Ticket(int userId, String accepted, String name, double reimbursement, String description) {
+    public Ticket(int userId, String status, String name, double reimbursement, String description) {
 
         this.userId = userId;
-        this.accepted = accepted;
+        this.status = status;
         this.name = name;
         this.reimbursement = reimbursement;
         this.description = description;
@@ -61,11 +61,11 @@ public class Ticket implements Comparable<Ticket>{
     }
 
     public String getAccepted() {
-        return accepted;
+        return status;
     }
 
-    public void setAccepted(String accepted) {
-        this.accepted = accepted;
+    public void setAccepted(String status) {
+        this.status = status;
     }
 
     public double getReimbursement() {
@@ -97,7 +97,7 @@ public class Ticket implements Comparable<Ticket>{
         return "Ticket{" +
                 "ticketId=" + ticketId +
                 ", userId=" + userId +
-                ", accepted='" + accepted + '\'' +
+                ", status='" + status + '\'' +
                 ", name='" + name + '\'' +
                 ", reimbursement=" + reimbursement +
                 ", description='" + description + '\'' +
@@ -106,7 +106,6 @@ public class Ticket implements Comparable<Ticket>{
     }
 
     @Override
-    public int compareTo(Ticket o) {
-        return this.ticketTime.compareTo(o.ticketTime);
+    public int compareTo(Ticket o) {return this.ticketTime.compareTo(o.ticketTime);
     }
 }

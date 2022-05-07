@@ -22,7 +22,7 @@ public class PastTicketDaoImpl implements PastTicketDao{
     @Override
     public void insert(Ticket ticket) {
         // question marks are placeholders for the real values:
-        String sql = "insert into pastticket (int ticketid, int userid, String accepted, String name, double reimbursement, String description, Timestamp ticketTime)" +
+        String sql = "insert into pastticket (ticketid, userid, status, name, reimbursement, description, ticketTime)" +
                 " values (DEFAULT, ?, ?, ?, ?, ?, DEFAULT);";
 
         try {
@@ -104,7 +104,7 @@ public class PastTicketDaoImpl implements PastTicketDao{
     @Override
     public CustomList<Ticket> getAllByUserId(int userId) {
         // create a list of accounts to store our results:
-        CustomList<Ticket> pastTickets = new CustomArrayList<>();
+        CustomList<Ticket> pastTickets = new CustomArrayList<Ticket>();
         String sql = "select * from pastticket where userid = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -126,12 +126,12 @@ public class PastTicketDaoImpl implements PastTicketDao{
         try {
             int ticketId = resultSet.getInt("ticketid");
             int userId = resultSet.getInt("userid");
-            String accepted = resultSet.getString("accepted");
+            String status = resultSet.getString("status");
             String name = resultSet.getString("name");
             double reimbursement = resultSet.getDouble("reimbursement");
             String description = resultSet.getString("description");
             Timestamp ticketTime = resultSet.getTimestamp("ticketTime");
-            return new Ticket(ticketId, userId, accepted, name, reimbursement, description, ticketTime);
+            return new Ticket(ticketId, userId, status, name, reimbursement, description, ticketTime);
         } catch(SQLException e) {
             e.printStackTrace();
         }

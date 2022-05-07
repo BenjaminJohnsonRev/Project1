@@ -38,8 +38,7 @@ public class PastTicketServlet extends HttpServlet {
         }
         //todo Rory had services here, so we can replace dao with that if needed
         CustomList<Ticket> pastTickets = pastTicketDao.getAllByUserId(employeeId);
-        CustomSort cs = new CustomSort();
-        cs.sort(pastTickets);
+        CustomSort.sort(pastTickets);
         out.println(pastTickets);
     }
 
@@ -57,14 +56,14 @@ public class PastTicketServlet extends HttpServlet {
 
         TicketFactory.makeAPastTicket(check,postTicket);
 
-        try{
-            ObjectMapper mapper = new ObjectMapper();
-            Ticket payload = mapper.readValue(req.getInputStream(), Ticket.class);
-            pastTicketDao.insert(payload);
-            resp.setStatus(203);
-        }catch (IOException e){
-            resp.setStatus(500);
-            e.printStackTrace();
-        }
+//        try{
+//            ObjectMapper mapper = new ObjectMapper();
+//            Ticket payload = mapper.readValue(req.getReader(), Ticket.class);
+//            pastTicketDao.insert(payload);
+//            resp.setStatus(203);
+//        }catch (IOException e){
+//            resp.setStatus(500);
+//            e.printStackTrace();
+//        }
     }
 }

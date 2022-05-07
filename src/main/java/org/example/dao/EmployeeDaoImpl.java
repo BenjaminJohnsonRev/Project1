@@ -2,10 +2,7 @@ package org.example.dao;
 
 import org.example.entity.Employee;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
@@ -94,5 +91,34 @@ public class EmployeeDaoImpl implements EmployeeDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void initTables() {
+        // we don't see any ? placeholders because this statement will be the same every time
+        String sql = "DROP TABLE IF EXISTS employee; CREATE TABLE employee(userid SERIAL PRIMARY KEY, username VARCHAR(50), password varchar(50));";
+
+        // we could add a procedure as well as so we can test it with h2
+        try {
+            // creating a statement instead of preparinf it
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void fillTables() {
+        String sql = "insert into employee(userid, username, password) values (default, 'name 1', 'password 1');\n";
+        sql += "insert into employee(userid, username, password) values (default, 'name 2', 'password 2');\n";
+        sql += "insert into employee(userid, username, password) values (default, 'name 3', 'password 3');";
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

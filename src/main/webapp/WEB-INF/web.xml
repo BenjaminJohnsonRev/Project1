@@ -57,7 +57,7 @@
 
     <servlet>
         <servlet-name>postTicketServlet</servlet-name>
-        <servlet-class>org.example.servlets.PastTicketServlet</servlet-class>
+        <servlet-class>org.example.servlets.PostTicketServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>postTicketServlet</servlet-name>
