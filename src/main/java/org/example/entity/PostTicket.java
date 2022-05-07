@@ -7,15 +7,17 @@ public class PostTicket {
 
     private int ticketId;
     private int userId;
+    private String accepted;
     private String name;
     private double reimbursement;
     private String description;
     private Timestamp ticketTime;
 
-    public PostTicket(int ticketId, int userId, String name, double reimbursement, String description, Timestamp ticketTime) {
+    public PostTicket(int ticketId, int userId, String accepted, String name, double reimbursement, String description, Timestamp ticketTime) {
 
         this.ticketId = ticketId;
         this.userId = userId;
+        this.accepted = accepted;
         this.name = name;
         this.reimbursement = reimbursement;
         this.description = description;
@@ -77,17 +79,25 @@ public class PostTicket {
         this.ticketTime = ticketTime;
     }
 
+    public String getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(String accepted) {
+        this.accepted = accepted;
+    }
+
     @Override
     public String toString() {
-        return "PostTickets{" +
+        return "PostTicket{" +
                 "ticketId=" + ticketId +
                 ", userId=" + userId +
+                ", accepted='" + accepted + '\'' +
                 ", name='" + name + '\'' +
                 ", reimbursement=" + reimbursement +
                 ", description='" + description + '\'' +
                 ", ticketTime=" + ticketTime +
                 '}';
     }
-
 }
 

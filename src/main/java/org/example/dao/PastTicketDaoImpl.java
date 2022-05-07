@@ -1,8 +1,11 @@
 package org.example.dao;
 
+import org.example.customLists.CustomArrayList;
+import org.example.customLists.CustomList;
 import org.example.entity.Manager;
 import org.example.entity.PastTicket;
 import org.example.entity.PostTicket;
+import org.example.entity.Ticket;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,9 +20,9 @@ public class PastTicketDaoImpl implements PastTicketDao{
     }
 
     @Override
-    public void insert(PostTicket postTicket, String accepted) {
+    public void insert(Ticket ticket) {
         // question marks are placeholders for the real values:
-        String sql = "insert into account (int ticketid, int userid, String accepted, String name, double reimbursement, String description, Timestamp ticketTime)" +
+        String sql = "insert into pastticket (ticketid, userid, status, name, reimbursement, description, ticketTime)" +
                 " values (DEFAULT, ?, ?, ?, ?, ?, DEFAULT);";
 
         try {
@@ -29,11 +32,11 @@ public class PastTicketDaoImpl implements PastTicketDao{
             // that returns the generated keys (id)
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             // fill in the values with the data from our account object:
-            preparedStatement.setInt(1, postTicket.getUserId());
-            preparedStatement.setString(2, accepted);
-            preparedStatement.setString(3, postTicket.getName());
-            preparedStatement.setDouble(4, postTicket.getReimbursement());
-            preparedStatement.setString(5, postTicket.getDescription());
+            preparedStatement.setInt(1, ticket.getUserId());
+            preparedStatement.setString(2, ticket.getAccepted());
+            preparedStatement.setString(3, ticket.getName());
+            preparedStatement.setDouble(4, ticket.getReimbursement());
+            preparedStatement.setString(5, ticket.getDescription());
             // now that our statement is prepared, we can execute it:
             // count is how many rows are affected (optimally we would have 1, we are inserting a single account)
             int count = preparedStatement.executeUpdate();
@@ -58,7 +61,7 @@ public class PastTicketDaoImpl implements PastTicketDao{
     }
 
     @Override
-    public PastTicket getPastTicketByTicketId(int ticketId) {
+    public Ticket getByTicketId(int ticketId) {
         String sql = "select * from pastticket where ticketid = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -68,7 +71,7 @@ public class PastTicketDaoImpl implements PastTicketDao{
             // checking, do we have a account from this query
             if (resultSet.next()) {
                 // extract out the data
-                PastTicket pastTicket = getPastTicket(resultSet);
+                Ticket pastTicket = getPastTicket(resultSet);
                 return pastTicket;
             }
         } catch (SQLException e) {
@@ -78,41 +81,57 @@ public class PastTicketDaoImpl implements PastTicketDao{
     }
 
     @Override
-    public List<PastTicket> getAllPastTickets() {
+    public CustomList<Ticket> getAll() {
         // create a list of accounts to store our results:
-        List<PastTicket> pastTickets = new ArrayList<>();
+        CustomList<Ticket> pastTickets = new CustomArrayList<Ticket>();
         String sql = "select * from pastticket;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            // we don't need to set any parameters because we're getting all accounts:
+
             ResultSet resultSet = preparedStatement.executeQuery();
             // we use a while loop because there are multiple results:
             while(resultSet.next()) {
-                PastTicket pastTicket = getPastTicket(resultSet);
+                Ticket pastTicket = getPastTicket(resultSet);
                 // add account to list of accounts
-                accounts.add(account);
+                pastTickets.add(pastTicket);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return accounts;
+        return pastTickets;
     }
 
     @Override
-    public List<PastTicket> getAllPastTicketsByUserId(int userId) {
-        return null;
+    public CustomList<Ticket> getAllByUserId(int userId) {
+        // create a list of accounts to store our results:
+        CustomList<Ticket> pastTickets = new CustomArrayList<Ticket>();
+        String sql = "select * from pastticket where userid = ?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            // we use a while loop because there are multiple results:
+            while(resultSet.next()) {
+                Ticket pastTicket = getPastTicket(resultSet);
+                // add account to list of accounts
+                pastTickets.add(pastTicket);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pastTickets;
     }
 
-    public PastTicket getPastTicket(ResultSet resultSet) {
+    public Ticket getPastTicket(ResultSet resultSet) {
         try {
             int ticketId = resultSet.getInt("ticketid");
             int userId = resultSet.getInt("userid");
-            String accepted = resultSet.getString("accepted");
+            String status = resultSet.getString("status");
             String name = resultSet.getString("name");
             double reimbursement = resultSet.getDouble("reimbursement");
             String description = resultSet.getString("description");
             Timestamp ticketTime = resultSet.getTimestamp("ticketTime");
-            return new PastTicket(ticketId, userId, accepted, name, reimbursement, description, ticketTime);
+            return new Ticket(ticketId, userId, status, name, reimbursement, description, ticketTime);
         } catch(SQLException e) {
             e.printStackTrace();
         }
