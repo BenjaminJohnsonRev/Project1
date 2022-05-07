@@ -1,5 +1,6 @@
 package org.example.dao;
 
+import org.example.customLists.CustomList;
 import org.example.entity.PastTicket;
 import org.example.entity.PostTicket;
 import org.example.entity.Ticket;
@@ -10,7 +11,7 @@ public interface PastTicketDao {
 
     public void insert(Ticket ticket);
     public Ticket getByTicketId(int ticketId);
-    public List<Ticket> getAll();
-    public List<Ticket> getAllByUserId(int userId);
+    public CustomList<Ticket> getAll();
+    public CustomList<Ticket> getAllByUserId(int userId);
 
 }

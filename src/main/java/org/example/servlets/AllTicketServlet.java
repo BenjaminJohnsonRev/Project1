@@ -1,5 +1,7 @@
 package org.example.servlets;
 
+import org.example.customLists.CustomList;
+import org.example.customLists.CustomSort;
 import org.example.dao.DaoFactory;
 import org.example.dao.PastTicketDao;
 import org.example.dao.PostTicketDao;
@@ -22,24 +24,26 @@ public class AllTicketServlet extends HttpServlet {
         PrintWriter out =  resp.getWriter();
         int employeeId;
         try {
-            employeeId = Integer.parseInt((req.getParameter("userId")));
+            employeeId = Integer.parseInt((req.getParameter("id")));
         } catch (NumberFormatException e) {
             //e.printStackTrace();
-            List<Ticket> postTickets = postTicketDao.getAll();
-            List<Ticket> pastTickets = pastTicketDao.getAll();
+            CustomList<Ticket> postTickets = postTicketDao.getAll();
+            CustomList<Ticket> pastTickets = pastTicketDao.getAll();
             pastTickets.addAll(postTickets);
-            out.println("All Books:");
-            for(Ticket t: pastTickets) {
-                out.println(t);
+            out.println("All Tickets:");
+            for(int i = 0; i < pastTickets.length(); i++) {
+                out.println(pastTickets.get(i));
             }
             return;
         }
 
-        List<Ticket> postTickets = postTicketDao.getAllByUserId(employeeId);
-        List<Ticket> pastTickets = pastTicketDao.getAllByUserId(employeeId);
+        CustomList<Ticket> postTickets = postTicketDao.getAllByUserId(employeeId);
+        CustomList<Ticket> pastTickets = pastTicketDao.getAllByUserId(employeeId);
         pastTickets.addAll(postTickets);
-        Collections.sort(pastTickets);
-        out.println(pastTickets);
+        CustomSort.sort(pastTickets);
+        for(int i = 0; i < pastTickets.length(); i++) {
+            out.println(pastTickets.get(i));
+        }
 
     }
 

@@ -1,5 +1,7 @@
 package org.example.dao;
 
+import org.example.customLists.CustomArrayList;
+import org.example.customLists.CustomList;
 import org.example.entity.Manager;
 import org.example.entity.PastTicket;
 import org.example.entity.PostTicket;
@@ -78,9 +80,9 @@ public class PostTicketDaoImpl implements PostTicketDao{
     }
 
     @Override
-    public List<Ticket> getAll() {
+    public CustomList<Ticket> getAll() {
         // create a list of accounts to store our results:
-        List<Ticket> postTickets = new ArrayList<>();
+        CustomList<Ticket> postTickets = new CustomArrayList<Ticket>();
         String sql = "select * from postticket;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -99,9 +101,9 @@ public class PostTicketDaoImpl implements PostTicketDao{
     }
 
     @Override
-    public List<Ticket> getAllByUserId(int userId) {
+    public CustomList<Ticket> getAllByUserId(int userId) {
         // create a list of accounts to store our results:
-        List<Ticket> postTickets = new ArrayList<>();
+        CustomList<Ticket> postTickets = new CustomArrayList<Ticket>();
         String sql = "select * from postticket where userid = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -142,12 +144,12 @@ public class PostTicketDaoImpl implements PostTicketDao{
         try {
             int ticketId = resultSet.getInt("ticketid");
             int userId = resultSet.getInt("userid");
-            String accepted = resultSet.getString("accepted");
+            String status = resultSet.getString("status");
             String name = resultSet.getString("name");
             double reimbursement = resultSet.getDouble("reimbursement");
             String description = resultSet.getString("description");
             Timestamp ticketTime = resultSet.getTimestamp("ticketTime");
-            return new Ticket(ticketId, userId, accepted, name, reimbursement, description, ticketTime);
+            return new Ticket(ticketId, userId, status, name, reimbursement, description, ticketTime);
         } catch(SQLException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,8 @@
 package org.example.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.customLists.CustomList;
+import org.example.customLists.CustomSort;
 import org.example.dao.DaoFactory;
 import org.example.dao.PostTicketDao;
 import org.example.entity.Ticket;
@@ -21,20 +23,20 @@ public class PostTicketServlet extends HttpServlet {
         PrintWriter out =  resp.getWriter();
         int employeeId;
         try{
-            employeeId = Integer.parseInt((req.getParameter("userId")));
+            employeeId = Integer.parseInt((req.getParameter("id")));
         } catch(NumberFormatException e){
             //e.printStackTrace();
-            List<Ticket> postTickets = postTicketDao.getAll();
+            CustomList<Ticket> postTickets = postTicketDao.getAll();
             out.println("Pending Tickets of all employees: ");
-            for(Ticket pt: postTickets){
-                out.println(pt);
+            for(int i = 0; i < postTickets.length(); i++){
+                out.println(postTickets.get(i));
             }
             return;
         }
         //todo Rory had services here, so we can replace dao with that if needed
         
-        List<Ticket> postTickets = postTicketDao.getAllByUserId(employeeId);
-        Collections.sort(postTickets);
+        CustomList<Ticket> postTickets = postTicketDao.getAllByUserId(employeeId);
+        CustomSort.sort(postTickets);
         out.println(postTickets);
     }
 

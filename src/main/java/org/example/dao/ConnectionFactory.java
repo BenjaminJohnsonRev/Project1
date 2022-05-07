@@ -43,7 +43,7 @@ public class ConnectionFactory {
                     e.printStackTrace();
                 }
                 // access these values from outside of this file (dbConfig.properties)
-                ResourceBundle bundle = ResourceBundle.getBundle("jdbc");
+                ResourceBundle bundle = ResourceBundle.getBundle("dbConfig");
                 //jdbc:sqlserver://<server_name>:<port>
                 String url = bundle.getString("url");
                 String username = bundle.getString("username");
