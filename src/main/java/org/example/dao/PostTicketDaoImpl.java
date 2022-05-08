@@ -32,7 +32,7 @@ public class PostTicketDaoImpl implements PostTicketDao{
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             // fill in the values with the data from our account object:
             preparedStatement.setInt(1, ticket.getUserid());
-            preparedStatement.setString(2, ticket.getAccepted());
+            preparedStatement.setString(2, ticket.getStatus());
             preparedStatement.setString(3, ticket.getName());
             preparedStatement.setDouble(4, ticket.getReimbursement());
             preparedStatement.setString(5, ticket.getDescription());
@@ -154,5 +154,41 @@ public class PostTicketDaoImpl implements PostTicketDao{
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void initTables() {
+        // we don't see any ? placeholders because this statement will be the same every time
+        String sql = "DROP TABLE IF EXISTS pastticket; " +
+                "DROP TABLE IF EXISTS postticket;" +
+                "DROP TABLE IF EXISTS employee; CREATE TABLE employee(userid SERIAL PRIMARY KEY, username VARCHAR(50), password varchar(50));" +
+                "create table postticket (ticketid serial primary key, userid int, status varchar, name varchar, reimbursement float, description varchar, ticketTime TimeStamp default current_timestamp," +
+                "foreign key (userid) references employee(userid));";
+
+        // we could add a procedure as well as so we can test it with h2
+        try {
+            // creating a statement instead of preparinf it
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void fillTables() {
+        String sql = "insert into employee(userid, username, password) values (default, 'name 1', 'password 1');\n";
+        sql += "insert into employee(userid, username, password) values (default, 'name 2', 'password 2');\n";
+        sql += "insert into employee(userid, username, password) values (default, 'name 3', 'password 3');";
+        sql += "insert into postticket (ticketid,userid,status,name,reimbursement,description, ticketTime) values (default, 1, 'pending', 'name 1', 1.00, 'test 1', Default);\n";
+        sql += "insert into postticket (ticketid,userid,status,name,reimbursement,description, ticketTime) values (default, 1, 'pending', 'name 2', 2.00, 'test 2', Default);\n";
+        sql += "insert into postticket (ticketid,userid,status,name,reimbursement,description, ticketTime) values (default, 2, 'pending', 'name 3', 3.00, 'test 3', Default);\n";
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

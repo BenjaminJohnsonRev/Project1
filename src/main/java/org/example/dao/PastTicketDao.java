@@ -14,4 +14,7 @@ public interface PastTicketDao {
     public CustomList<Ticket> getAll();
     public CustomList<Ticket> getAllByUserid(int userid);
 
+    //Instantiate tables and fills is with dummy data.
+    public void initTables();
+    public void fillTables();
 }

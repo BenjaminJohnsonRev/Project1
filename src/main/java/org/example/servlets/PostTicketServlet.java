@@ -37,14 +37,16 @@ public class PostTicketServlet extends HttpServlet {
         
         CustomList<Ticket> postTickets = postTicketDao.getAllByUserid(employeeid);
         CustomSort.sort(postTickets);
-        out.println(postTickets);
+        for(int i = 0; i < postTickets.length(); i++){
+            out.println(postTickets.get(i));
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
             ObjectMapper mapper = new ObjectMapper();
-            Ticket payload = mapper.readValue(req.getInputStream(), Ticket.class);
+            Ticket payload = mapper.readValue(req.getReader(), Ticket.class);
             postTicketDao.insert(payload);
             resp.setStatus(203);
         }catch (IOException e){
