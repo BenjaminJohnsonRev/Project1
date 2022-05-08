@@ -28,18 +28,14 @@ public class PostTicketServlet extends HttpServlet {
             //e.printStackTrace();
             CustomList<Ticket> postTickets = postTicketDao.getAll();
             out.println("Pending Tickets of all employees: ");
-            for(int i = 0; i < postTickets.length(); i++){
-                out.println(postTickets.get(i));
-            }
+            out.print(postTickets);
             return;
         }
         //todo Rory had services here, so we can replace dao with that if needed
         
         CustomList<Ticket> postTickets = postTicketDao.getAllByUserid(employeeid);
         CustomSort.sort(postTickets);
-        for(int i = 0; i < postTickets.length(); i++){
-            out.println(postTickets.get(i));
-        }
+        out.print(postTickets);
     }
 
     @Override

@@ -1,10 +1,7 @@
 package org.example.servlets;
 
 import junit.framework.TestCase;
-import org.example.dao.DaoFactory;
-import org.example.dao.EmployeeDao;
-import org.example.dao.PastTicketDao;
-import org.example.dao.PastTicketDaoImpl;
+import org.example.dao.*;
 import org.example.entity.Employee;
 
 import org.example.entity.Ticket;
@@ -20,9 +17,9 @@ import java.io.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class PastTicketServletTest extends TestCase{
+public class AllTicketServletTest extends TestCase{
     PastTicketDao pastTicketDao = DaoFactory.getPastTicketDao();
-    EmployeeDao employeeDao = DaoFactory.getEmployeeDao();
+    PostTicketDao postTicketDao = DaoFactory.getPostTicketDao();
 
     @BeforeEach
     public void setUp() {
@@ -47,17 +44,18 @@ public class PastTicketServletTest extends TestCase{
 
         // create a new book servlet and do the get method:
         try {
-            new PastTicketServlet().doGet(request, response);
+            new AllTicketServlet().doGet(request, response);
         } catch(ServletException ex){
             System.out.println(ex.getLocalizedMessage());
         }
 
         // flush the writer, make sure all the output is written:
         writer.flush();
-        // assert that the result contains all of the proper books:
         Ticket ticket = pastTicketDao.getByTicketid(1);
         assertTrue(stringWriter.toString().contains("Ticket{ticketid=1, userid=1, status='accepted', name='name 1', reimbursement=1.0, description='test 1', ticketTime="+ticket.getTicketTime()+"}"));
 
+        Ticket ticket1 = postTicketDao.getByTicketid(1);
+        assertTrue(stringWriter.toString().contains("Ticket{ticketid=1, userid=1, status='pending', name='name 1', reimbursement=1.0, description='test 1', ticketTime="+ticket1.getTicketTime()+"}"));
 
     }
 
@@ -92,39 +90,8 @@ public class PastTicketServletTest extends TestCase{
 
         Ticket ticket3 = pastTicketDao.getByTicketid(3);
         assertTrue(stringWriter.toString().contains("Ticket{ticketid=3, userid=2, status='accepted', name='name 3', reimbursement=3.0, description='test 3', ticketTime="+ticket3.getTicketTime()+"}"));
-    }
 
-    @Test
-    public void testDoPost() throws IOException {
-        // mock the request/response:
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        HttpServletResponse response = mock(HttpServletResponse.class);
-
-        // configure/mocking the id query parameter (id = 1):
-        when(request.getParameter("id")).thenReturn("1");
-        when(request.getParameter("check")).thenReturn("true");
-
-        // set up the print writer:
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter writer = new PrintWriter(stringWriter);
-        when(response.getWriter()).thenReturn(writer);
-
-
-        // create a new book servlet and do the get method:
-        try {
-            new PastTicketServlet().doPost(request, response);
-        } catch(ServletException ex){
-            System.out.println(ex.getLocalizedMessage());
-        }
-
-        // flush the writer, make sure all the output is written:
-        writer.flush();
-        // assert that the result contains all of the proper books:
-        Ticket ticket1 = pastTicketDao.getByTicketid(4);
-        assertEquals(ticket1.getUserid(), 1);
-        assertEquals(ticket1.getStatus(),"accepted");
-        assertEquals(ticket1.getName(), "name 1");
-        assertEquals(ticket1.getReimbursement(), 1.0);
-        assertEquals(ticket1.getDescription(), "test 1");
+        Ticket ticket4 = postTicketDao.getByTicketid(1);
+        assertTrue(stringWriter.toString().contains("Ticket{ticketid=1, userid=1, status='accepted', name='name 1', reimbursement=1.0, description='test 1', ticketTime="+ticket4.getTicketTime()+"}"));
     }
 }

@@ -85,7 +85,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void initTables() {
         // we don't see any ? placeholders because this statement will be the same every time
-        String sql = "DROP TABLE IF EXISTS employee; CREATE TABLE employee(userid SERIAL PRIMARY KEY, username VARCHAR(50), password varchar(50));";
+        String sql = "DROP TABLE IF EXISTS pastticket; " +
+                "DROP TABLE IF EXISTS postticket;" +
+                "DROP TABLE IF EXISTS employee; " +
+                "CREATE TABLE employee(userid SERIAL PRIMARY KEY, username VARCHAR(50), password varchar(50));" +
+                "create table postticket (ticketid serial primary key, userid int, status varchar, name varchar, reimbursement float, description varchar, ticketTime TimeStamp default current_timestamp," +
+                "foreign key (userid) references employee(userid));" +
+                "create table pastticket (ticketid serial primary key, userid int, status varchar, name varchar, reimbursement float, description varchar, ticketTime TimeStamp default current_timestamp," +
+                "foreign key (userid) references employee(userid));";
 
         // we could add a procedure as well as so we can test it with h2
         try {

@@ -79,4 +79,12 @@ public class CustomArrayList<T> implements CustomList {
         }
     }
 
+    @Override
+    public String toString() {
+        String string = "";
+        for(int i = 0; i<size; i++) {
+            string += elements[i].toString() + "\n";
+        }
+        return string;
+    }
 }
