@@ -8,4 +8,5 @@ public interface CustomList<T>{
     public int length();
     public void addAll(CustomList<T> o);
     public void set(int i, T element);
+    public String toString();
 }
