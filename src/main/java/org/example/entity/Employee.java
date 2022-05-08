@@ -38,11 +38,11 @@ public class Employee {
         this.password = password;
     }
 
-    public int getUserId() {
+    public int getUserid() {
         return userid;
     }
 
-//    public void setUserId(int userid) {
+//    public void setUserid(int userid) {
 //        this.userid = userid;
 //    }
 
@@ -51,7 +51,7 @@ public class Employee {
         return "Employee{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", userId=" + userid +
+                ", userid=" + userid +
                 '}';
     }
 }

@@ -24,9 +24,9 @@ public class PastTicketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out =  resp.getWriter();
-        int employeeId;
+        int employeeid;
         try{
-            employeeId = Integer.parseInt((req.getParameter("id")));
+            employeeid = Integer.parseInt((req.getParameter("id")));
         } catch(NumberFormatException e){
             //e.printStackTrace();
             CustomList<Ticket> pastTickets = pastTicketDao.getAll();
@@ -37,7 +37,7 @@ public class PastTicketServlet extends HttpServlet {
             return;
         }
         //todo Rory had services here, so we can replace dao with that if needed
-        CustomList<Ticket> pastTickets = pastTicketDao.getAllByUserId(employeeId);
+        CustomList<Ticket> pastTickets = pastTicketDao.getAllByUserid(employeeid);
         CustomSort.sort(pastTickets);
         out.println(pastTickets);
     }
@@ -52,7 +52,7 @@ public class PastTicketServlet extends HttpServlet {
         boolean check;
         idToPass = Integer.parseInt(req.getParameter("id"));
         check = Boolean.parseBoolean(req.getParameter("check"));
-        Ticket postTicket = postTicketDao.getByTicketId(idToPass);
+        Ticket postTicket = postTicketDao.getByTicketid(idToPass);
 
         TicketFactory.makeAPastTicket(check,postTicket);
 

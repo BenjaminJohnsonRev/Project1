@@ -62,12 +62,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public Employee getEmployeeById(int userId) {
+    public Employee getEmployeeByid(int userid) {
         String sql = "select * from employee where userid = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             // set the id using the id that we passed in:
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(1, userid);
             ResultSet resultSet = preparedStatement.executeQuery();
             // checking, do we have an employee from this query
             if (resultSet.next()) {
