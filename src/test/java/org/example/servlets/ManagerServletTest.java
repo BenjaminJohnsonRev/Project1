@@ -1,30 +1,29 @@
 package org.example.servlets;
 
+
 import junit.framework.TestCase;
 import org.example.dao.DaoFactory;
-import org.example.dao.EmployeeDao;
-import org.example.entity.Employee;
-
+import org.example.dao.ManagerDao;
+import org.example.dao.ManagerDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.*;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class EmployeeServletTest extends TestCase {
-
-    EmployeeDao employeeDao = DaoFactory.getEmployeeDao();
+public class ManagerServletTest extends TestCase {
+    ManagerDao managerDao = DaoFactory.getManagerDao();
 
     @BeforeEach
     public void setUp() {
         // since we're testing with h2, create the tables every time:
-        employeeDao.initTables();
-        employeeDao.fillTables();
+        managerDao.initTables();
+        managerDao.fillTables();
     }
 
     @Test
@@ -35,6 +34,7 @@ public class EmployeeServletTest extends TestCase {
 
         // since we take in a buffered reader to read the body, we simulate it by putting
         // mock data in a local file called employee.txt, this is simulating what we would put in body of the request
+        // we can reuse employee files for manager testing
         FileReader fr = new FileReader("src/test/java/org/example/servlets/testEmployee");
         BufferedReader t = new BufferedReader(fr);
         // configure the buffered reader:
@@ -47,15 +47,15 @@ public class EmployeeServletTest extends TestCase {
 
         // create a new employee servlet and do the get method:
         try {
-            new EmployeeServlet().doGet(request, response);
+            new ManagerServlet().doGet(request, response);
         } catch(ServletException ex){
             System.out.println(ex.getLocalizedMessage());
         }
 
         // flush the writer, make sure all the output is written:
         writer.flush();
-        // assert that the result contains all of the proper employees:
-        assertTrue(stringWriter.toString().contains("Employee{username='name 1', password='password 1', userid=1}"));
+        // assert that the result contains all of the proper fields:
+        assertTrue(stringWriter.toString().contains("Manager{username='name 1', password='password 1'}"));
     }
 
     @Test
@@ -66,6 +66,7 @@ public class EmployeeServletTest extends TestCase {
 
         // since we take in a buffered reader to read the body, we simulate it by putting
         // mock data in a local file called employee.txt, this is simulating what we would put in body of the request
+        // we can reuse employee files for manager testing
         FileReader fr = new FileReader("src/test/java/org/example/servlets/testPostEmployee");
         BufferedReader t = new BufferedReader(fr);
         // configure the buffered reader:
@@ -79,7 +80,7 @@ public class EmployeeServletTest extends TestCase {
 
         // create a new employee servlet and do the get method:
         try {
-            new EmployeeServlet().doPost(request, response);
+            new ManagerServlet().doPost(request, response);
         } catch(ServletException ex){
             System.out.println(ex.getLocalizedMessage());
         }
@@ -87,6 +88,6 @@ public class EmployeeServletTest extends TestCase {
         // flush the writer, make sure all the output is written:
         writer.flush();
         // assert that the result contains all of the proper employees:
-        assertTrue(stringWriter.toString().contains("Employee{username='name 4', password='password 4', userid=4}"));
+        assertTrue(stringWriter.toString().contains("Manager{username='name 4', password='password 4'}"));
     }
 }

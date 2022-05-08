@@ -41,14 +41,13 @@ public class EmployeeServlet extends HttpServlet {
         try{
             ObjectMapper mapper = new ObjectMapper();
             Employee payload = mapper.readValue(req.getReader(), Employee.class);
-            System.out.println("Here 2!");
 
             employeeDao.insert(payload);
             //accepts username and password
             Employee result = employeeDao.getEmployeeByCredentials(payload.getUsername(), payload.getPassword());
             PrintWriter out = resp.getWriter();
             out.write(result.toString());
-            System.out.println(result);
+            //System.out.println(result);
 
             resp.setStatus(203);
         }catch (IOException e){

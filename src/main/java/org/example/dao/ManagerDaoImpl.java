@@ -3,10 +3,7 @@ package org.example.dao;
 import org.example.entity.Employee;
 import org.example.entity.Manager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ManagerDaoImpl implements ManagerDao {
     Connection connection;
@@ -17,7 +14,7 @@ public class ManagerDaoImpl implements ManagerDao {
     @Override
     public void insert(Manager manager) {
         // question marks are placeholders for the real values:
-        String sql = "insert into manager (userid, username, password) values (DEFAULT, ?, ?);";
+        String sql = "insert into manager (username, password) values (?, ?);";
 
         try {
             // if anything goes wrong here, we will catch the exception:
@@ -33,8 +30,6 @@ public class ManagerDaoImpl implements ManagerDao {
             if(count == 1) {
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 resultSet.next();
-                int userid = resultSet.getInt("userid");
-                System.out.println("generated userid is :" + userid);
             }
 
         } catch (SQLException e) {
@@ -63,6 +58,35 @@ public class ManagerDaoImpl implements ManagerDao {
         }
 
         return null;
+    }
+
+    @Override
+    public void initTables() {
+        // we don't see any ? placeholders because this statement will be the same every time
+        String sql = "DROP TABLE IF EXISTS manager; CREATE TABLE manager(username VARCHAR(50), password varchar(50));";
+
+        // we could add a procedure as well as so we can test it with h2
+        try {
+            // creating a statement instead of preparinf it
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void fillTables() {
+        String sql = "insert into manager(username, password) values ('name 1', 'password 1');\n";
+        sql += "insert into manager(username, password) values ('name 2', 'password 2');\n";
+        sql += "insert into manager(username, password) values ('name 3', 'password 3');";
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Manager getManager(ResultSet resultSet) {
