@@ -31,9 +31,7 @@ public class AllTicketServlet extends HttpServlet {
             CustomList<Ticket> pastTickets = pastTicketDao.getAll();
             pastTickets.addAll(postTickets);
             out.println("All Tickets:");
-            for(int i = 0; i < pastTickets.length(); i++) {
-                out.println(pastTickets.get(i));
-            }
+            out.print(pastTickets);
             return;
         }
 
@@ -41,10 +39,7 @@ public class AllTicketServlet extends HttpServlet {
         CustomList<Ticket> pastTickets = pastTicketDao.getAllByUserid(employeeid);
         pastTickets.addAll(postTickets);
         CustomSort.sort(pastTickets);
-        for(int i = 0; i < pastTickets.length(); i++) {
-            out.println(pastTickets.get(i));
-        }
-
+        out.print(pastTickets);
     }
 
 }

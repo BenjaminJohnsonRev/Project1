@@ -31,15 +31,13 @@ public class PastTicketServlet extends HttpServlet {
             //e.printStackTrace();
             CustomList<Ticket> pastTickets = pastTicketDao.getAll();
             out.println("Past Tickets of all employees: ");
-            for(int i = 0; i < pastTickets.length(); i++){
-                out.println(pastTickets.get(i));
-            }
+            out.print(pastTickets);
             return;
         }
         //todo Rory had services here, so we can replace dao with that if needed
         CustomList<Ticket> pastTickets = pastTicketDao.getAllByUserid(employeeid);
         CustomSort.sort(pastTickets);
-        out.println(pastTickets);
+        out.print(pastTickets);
     }
 
     @Override

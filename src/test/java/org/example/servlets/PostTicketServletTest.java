@@ -54,11 +54,7 @@ public class PostTicketServletTest extends TestCase{
         writer.flush();
         // assert that the result contains all of the proper books:
         Ticket ticket = postTicketDao.getByTicketid(1);
-        assertEquals(ticket.getUserid(), 1);
-        assertEquals(ticket.getStatus(),"pending");
-        assertEquals(ticket.getName(), "name 1");
-        assertEquals(ticket.getReimbursement(), 1.0);
-        assertEquals(ticket.getDescription(), "test 1");
+        assertTrue(stringWriter.toString().contains("Ticket{ticketid=1, userid=1, status='pending', name='name 1', reimbursement=1.0, description='test 1', ticketTime="+ticket.getTicketTime()+"}"));
 
 
     }
@@ -87,25 +83,13 @@ public class PostTicketServletTest extends TestCase{
         writer.flush();
         // assert that the result contains all of the proper books:
         Ticket ticket1 = postTicketDao.getByTicketid(1);
-        assertEquals(ticket1.getUserid(), 1);
-        assertEquals(ticket1.getStatus(),"pending");
-        assertEquals(ticket1.getName(), "name 1");
-        assertEquals(ticket1.getReimbursement(), 1.0);
-        assertEquals(ticket1.getDescription(), "test 1");
+        assertTrue(stringWriter.toString().contains("Ticket{ticketid=1, userid=1, status='pending', name='name 1', reimbursement=1.0, description='test 1', ticketTime="+ticket1.getTicketTime()+"}"));
 
         Ticket ticket2 = postTicketDao.getByTicketid(2);
-        assertEquals(ticket2.getUserid(), 1);
-        assertEquals(ticket2.getStatus(),"pending");
-        assertEquals(ticket2.getName(), "name 2");
-        assertEquals(ticket2.getReimbursement(), 2.0);
-        assertEquals(ticket2.getDescription(), "test 2");
+        assertTrue(stringWriter.toString().contains("Ticket{ticketid=2, userid=1, status='pending', name='name 2', reimbursement=2.0, description='test 2', ticketTime="+ticket2.getTicketTime()+"}"));
 
-        Ticket ticket = postTicketDao.getByTicketid(3);
-        assertEquals(ticket.getUserid(), 2);
-        assertEquals(ticket.getStatus(),"pending");
-        assertEquals(ticket.getName(), "name 3");
-        assertEquals(ticket.getReimbursement(), 3.0);
-        assertEquals(ticket.getDescription(), "test 3");
+        Ticket ticket3 = postTicketDao.getByTicketid(3);
+        assertTrue(stringWriter.toString().contains("Ticket{ticketid=3, userid=2, status='pending', name='name 3', reimbursement=3.0, description='test 3', ticketTime="+ticket3.getTicketTime()+"}"));
     }
 
     @Test
