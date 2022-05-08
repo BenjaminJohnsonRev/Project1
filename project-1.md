@@ -21,12 +21,12 @@ Due Date: 5-9-22
 
 
 #### User Stories
-- Employees can login to their account. XX getEmployeeServlet
-- Employees can register for a new account. XX postEmployeeServlet
-- Employees can submit a ticket (with price and description) for reimbursement. XX postTicketServlet
-- Employees can view their past tickets. XX getPastTickets
-- Employees can view pending tickets. XX getPostTickets
-- Employees can view tickets ordered by date. XX
+- Employees can login to their account. XX getEmployeeServletX
+- Employees can register for a new account. XX postEmployeeServletX
+- Employees can submit a ticket (with price and description) for reimbursement. XX postTicketServletX
+- Employees can view their past tickets. XX getPastTicketsX
+- Employees can view pending tickets. XX getPostTicketsX
+- Employees can view tickets ordered by date. XXX
 - Managers can login to their account. XX getManagerServlet
 - Managers can view all pending requests. XX getManagerPostTickets
 - Managers can view past tickets for all employees in the company. XX getManagerPastTickets
