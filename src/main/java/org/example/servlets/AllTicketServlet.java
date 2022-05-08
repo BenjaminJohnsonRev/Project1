@@ -22,9 +22,9 @@ public class AllTicketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out =  resp.getWriter();
-        int employeeId;
+        int employeeid;
         try {
-            employeeId = Integer.parseInt((req.getParameter("id")));
+            employeeid = Integer.parseInt((req.getParameter("id")));
         } catch (NumberFormatException e) {
             //e.printStackTrace();
             CustomList<Ticket> postTickets = postTicketDao.getAll();
@@ -37,8 +37,8 @@ public class AllTicketServlet extends HttpServlet {
             return;
         }
 
-        CustomList<Ticket> postTickets = postTicketDao.getAllByUserId(employeeId);
-        CustomList<Ticket> pastTickets = pastTicketDao.getAllByUserId(employeeId);
+        CustomList<Ticket> postTickets = postTicketDao.getAllByUserid(employeeid);
+        CustomList<Ticket> pastTickets = pastTicketDao.getAllByUserid(employeeid);
         pastTickets.addAll(postTickets);
         CustomSort.sort(pastTickets);
         for(int i = 0; i < pastTickets.length(); i++) {

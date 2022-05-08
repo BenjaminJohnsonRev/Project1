@@ -32,7 +32,7 @@ public class PastTicketDaoImpl implements PastTicketDao{
             // that returns the generated keys (id)
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             // fill in the values with the data from our account object:
-            preparedStatement.setInt(1, ticket.getUserId());
+            preparedStatement.setInt(1, ticket.getUserid());
             preparedStatement.setString(2, ticket.getAccepted());
             preparedStatement.setString(3, ticket.getName());
             preparedStatement.setDouble(4, ticket.getReimbursement());
@@ -47,8 +47,8 @@ public class PastTicketDaoImpl implements PastTicketDao{
                 // increment to the first element of the result set
                 resultSet.next();
                 // extract the id from the result set
-                int ticketId = resultSet.getInt(1);
-                System.out.println("Generated ticket number is: " + ticketId);
+                int ticketid = resultSet.getInt(1);
+                System.out.println("Generated ticket number is: " + ticketid);
             }
             else {
                 System.out.println("Something went wrong when adding the account!");
@@ -61,12 +61,12 @@ public class PastTicketDaoImpl implements PastTicketDao{
     }
 
     @Override
-    public Ticket getByTicketId(int ticketId) {
+    public Ticket getByTicketid(int ticketid) {
         String sql = "select * from pastticket where ticketid = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             // set the id using the id that we passed in:
-            preparedStatement.setInt(1, ticketId);
+            preparedStatement.setInt(1, ticketid);
             ResultSet resultSet = preparedStatement.executeQuery();
             // checking, do we have a account from this query
             if (resultSet.next()) {
@@ -102,13 +102,13 @@ public class PastTicketDaoImpl implements PastTicketDao{
     }
 
     @Override
-    public CustomList<Ticket> getAllByUserId(int userId) {
+    public CustomList<Ticket> getAllByUserid(int userid) {
         // create a list of accounts to store our results:
         CustomList<Ticket> pastTickets = new CustomArrayList<Ticket>();
         String sql = "select * from pastticket where userid = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(1, userid);
             ResultSet resultSet = preparedStatement.executeQuery();
             // we use a while loop because there are multiple results:
             while(resultSet.next()) {
@@ -124,14 +124,14 @@ public class PastTicketDaoImpl implements PastTicketDao{
 
     public Ticket getPastTicket(ResultSet resultSet) {
         try {
-            int ticketId = resultSet.getInt("ticketid");
-            int userId = resultSet.getInt("userid");
+            int ticketid = resultSet.getInt("ticketid");
+            int userid = resultSet.getInt("userid");
             String status = resultSet.getString("status");
             String name = resultSet.getString("name");
             double reimbursement = resultSet.getDouble("reimbursement");
             String description = resultSet.getString("description");
             Timestamp ticketTime = resultSet.getTimestamp("ticketTime");
-            return new Ticket(ticketId, userId, status, name, reimbursement, description, ticketTime);
+            return new Ticket(ticketid, userid, status, name, reimbursement, description, ticketTime);
         } catch(SQLException e) {
             e.printStackTrace();
         }

@@ -9,8 +9,8 @@ import java.util.TreeSet;
 
 public interface PostTicketDao {
     public void insert(Ticket ticket);
-    public Ticket getByTicketId(int ticketId);
+    public Ticket getByTicketid(int ticketid);
     public CustomList<Ticket> getAll();
-    public CustomList<Ticket> getAllByUserId(int userId);
+    public CustomList<Ticket> getAllByUserid(int userid);
     public void delete(Ticket postTicket);
 }

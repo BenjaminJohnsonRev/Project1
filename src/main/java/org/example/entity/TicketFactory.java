@@ -11,7 +11,7 @@ public class TicketFactory {
     public static void makePostTicket(Employee employee){
         Scanner scanner = new Scanner(System.in);
 
-        int id = employee.getUserId();
+        int id = employee.getUserid();
 
         String name = employee.getUsername();
 
@@ -35,7 +35,7 @@ public class TicketFactory {
 
     public static void makeAPastTicket(boolean approval, Ticket postTicket){
 
-        int userid = postTicket.getUserId();
+        int userid = postTicket.getUserid();
         String name = postTicket.getName();
         double amount = postTicket.getReimbursement();
         String desc = postTicket.getDescription();

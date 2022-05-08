@@ -30,6 +30,7 @@ public class CustomArrayList<T> implements CustomList {
         }
         return (T) elements[i];
     }
+
     @Override
     public void print(){
         for (Object element: elements){

@@ -21,9 +21,9 @@ public class PostTicketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out =  resp.getWriter();
-        int employeeId;
+        int employeeid;
         try{
-            employeeId = Integer.parseInt((req.getParameter("id")));
+            employeeid = Integer.parseInt((req.getParameter("id")));
         } catch(NumberFormatException e){
             //e.printStackTrace();
             CustomList<Ticket> postTickets = postTicketDao.getAll();
@@ -35,7 +35,7 @@ public class PostTicketServlet extends HttpServlet {
         }
         //todo Rory had services here, so we can replace dao with that if needed
         
-        CustomList<Ticket> postTickets = postTicketDao.getAllByUserId(employeeId);
+        CustomList<Ticket> postTickets = postTicketDao.getAllByUserid(employeeid);
         CustomSort.sort(postTickets);
         out.println(postTickets);
     }
