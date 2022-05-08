@@ -55,7 +55,7 @@ public class EmployeeServletTest extends TestCase {
         // flush the writer, make sure all the output is written:
         writer.flush();
         // assert that the result contains all of the proper books:
-        assertTrue(stringWriter.toString().contains("Employee{username='name 1', password='password 1', userId=1}"));
+        assertTrue(stringWriter.toString().contains("Employee{username='name 1', password='password 1', userid=1}"));
     }
 
     @Test
@@ -88,6 +88,6 @@ public class EmployeeServletTest extends TestCase {
         // flush the writer, make sure all the output is written:
         writer.flush();
         // assert that the result contains all of the proper books:
-        assertTrue(stringWriter.toString().contains("Employee{username='name 4', password='password 4', userId=4}"));
+        assertTrue(stringWriter.toString().contains("Employee{username='name 4', password='password 4', userid=4}"));
     }
 }

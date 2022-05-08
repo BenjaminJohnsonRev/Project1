@@ -5,18 +5,18 @@ import java.sql.Timestamp;
 
 public class PostTicket {
 
-    private int ticketId;
-    private int userId;
+    private int ticketid;
+    private int userid;
     private String accepted;
     private String name;
     private double reimbursement;
     private String description;
     private Timestamp ticketTime;
 
-    public PostTicket(int ticketId, int userId, String accepted, String name, double reimbursement, String description, Timestamp ticketTime) {
+    public PostTicket(int ticketid, int userid, String accepted, String name, double reimbursement, String description, Timestamp ticketTime) {
 
-        this.ticketId = ticketId;
-        this.userId = userId;
+        this.ticketid = ticketid;
+        this.userid = userid;
         this.accepted = accepted;
         this.name = name;
         this.reimbursement = reimbursement;
@@ -24,19 +24,19 @@ public class PostTicket {
         this.ticketTime = ticketTime;
     }
 
-    public PostTicket(int userId, String name, double reimbursement, String description) {
-        this.userId = userId;
+    public PostTicket(int userid, String name, double reimbursement, String description) {
+        this.userid = userid;
         this.name = name;
         this.reimbursement = reimbursement;
         this.description = description;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public String getName() {
@@ -47,12 +47,12 @@ public class PostTicket {
         this.name = name;
     }
 
-    public int getTicketId() {
-        return ticketId;
+    public int getTicketid() {
+        return ticketid;
     }
 
-    public void setTicketId(int ticketId) {
-        this.ticketId = ticketId;
+    public void setTicketid(int ticketid) {
+        this.ticketid = ticketid;
     }
 
     public double getReimbursement() {
@@ -90,8 +90,8 @@ public class PostTicket {
     @Override
     public String toString() {
         return "PostTicket{" +
-                "ticketId=" + ticketId +
-                ", userId=" + userId +
+                "ticketid=" + ticketid +
+                ", userid=" + userid +
                 ", accepted='" + accepted + '\'' +
                 ", name='" + name + '\'' +
                 ", reimbursement=" + reimbursement +

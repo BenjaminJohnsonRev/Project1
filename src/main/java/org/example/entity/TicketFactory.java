@@ -11,7 +11,7 @@ public class TicketFactory {
     public static void makePostTicket(Employee employee){
         Scanner scanner = new Scanner(System.in);
 
-        int id = employee.getUserId();
+        int id = employee.getUserid();
 
         String name = employee.getUsername();
 
@@ -35,7 +35,7 @@ public class TicketFactory {
 
     public static void makeAPastTicket(boolean approval, Ticket postTicket){
 
-        int userid = postTicket.getUserId();
+        int userid = postTicket.getUserid();
         String name = postTicket.getName();
         double amount = postTicket.getReimbursement();
         String desc = postTicket.getDescription();
@@ -43,9 +43,9 @@ public class TicketFactory {
         Ticket pastTicket;
 
         if(approval) {
-            pastTicket = new Ticket(userid, "ticketApproved", name, amount, desc);
+            pastTicket = new Ticket(userid, "accepted", name, amount, desc);
         } else {
-            pastTicket = new Ticket(userid, "ticketDenied", name, amount, desc);
+            pastTicket = new Ticket(userid, "rejected", name, amount, desc);
         }
 
         //todo: not actual code

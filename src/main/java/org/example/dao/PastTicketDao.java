@@ -10,8 +10,11 @@ import java.util.List;
 public interface PastTicketDao {
 
     public void insert(Ticket ticket);
-    public Ticket getByTicketId(int ticketId);
+    public Ticket getByTicketid(int ticketid);
     public CustomList<Ticket> getAll();
-    public CustomList<Ticket> getAllByUserId(int userId);
+    public CustomList<Ticket> getAllByUserid(int userid);
 
+    //Instantiate tables and fills is with dummy data.
+    public void initTables();
+    public void fillTables();
 }

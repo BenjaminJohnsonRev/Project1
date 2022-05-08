@@ -4,8 +4,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.example</groupId>
-  <artifactId>Project1</artifactId>
+  <groupid>org.example</groupid>
+  <artifactid>Project1</artifactid>
   <version>1.0-SNAPSHOT</version>
 
   <name>Project1</name>
@@ -20,51 +20,51 @@
 
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupid>junit</groupid>
+      <artifactid>junit</artifactid>
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
+      <groupid>javax.servlet</groupid>
+      <artifactid>javax.servlet-api</artifactid>
       <version>3.1.0</version>
       <scope>provided</scope>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
     <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
+      <groupid>org.mockito</groupid>
+      <artifactid>mockito-core</artifactid>
       <version>4.5.1</version>
       <scope>test</scope>
     </dependency>
 
 
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
+      <groupid>com.h2database</groupid>
+      <artifactid>h2</artifactid>
       <version>1.4.194</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
+      <groupid>com.fasterxml.jackson.core</groupid>
+      <artifactid>jackson-databind</artifactid>
       <version>2.13.1</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
     <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
+      <groupid>org.postgresql</groupid>
+      <artifactid>postgresql</artifactid>
       <version>42.3.4</version>
     </dependency>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
+      <groupid>org.junit.jupiter</groupid>
+      <artifactid>junit-jupiter-api</artifactid>
       <version>5.8.2</version>
       <scope>test</scope>
     </dependency>
@@ -75,41 +75,41 @@
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
+          <artifactid>maven-clean-plugin</artifactid>
           <version>3.1.0</version>
         </plugin>
         <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
         <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
+          <artifactid>maven-resources-plugin</artifactid>
           <version>3.0.2</version>
         </plugin>
         <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
+          <artifactid>maven-compiler-plugin</artifactid>
           <version>3.8.0</version>
         </plugin>
         <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
+          <artifactid>maven-surefire-plugin</artifactid>
           <version>2.22.1</version>
         </plugin>
         <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
+          <artifactid>maven-jar-plugin</artifactid>
           <version>3.0.2</version>
         </plugin>
         <plugin>
-          <artifactId>maven-install-plugin</artifactId>
+          <artifactid>maven-install-plugin</artifactid>
           <version>2.5.2</version>
         </plugin>
         <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
+          <artifactid>maven-deploy-plugin</artifactid>
           <version>2.8.2</version>
         </plugin>
         <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
         <plugin>
-          <artifactId>maven-site-plugin</artifactId>
+          <artifactid>maven-site-plugin</artifactid>
           <version>3.7.1</version>
         </plugin>
         <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <artifactid>maven-project-info-reports-plugin</artifactid>
           <version>3.0.0</version>
         </plugin>
       </plugins>

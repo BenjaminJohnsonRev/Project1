@@ -31,8 +31,8 @@ public class PostTicketDaoImpl implements PostTicketDao{
             // that returns the generated keys (id)
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             // fill in the values with the data from our account object:
-            preparedStatement.setInt(1, ticket.getUserId());
-            preparedStatement.setString(2, ticket.getAccepted());
+            preparedStatement.setInt(1, ticket.getUserid());
+            preparedStatement.setString(2, ticket.getStatus());
             preparedStatement.setString(3, ticket.getName());
             preparedStatement.setDouble(4, ticket.getReimbursement());
             preparedStatement.setString(5, ticket.getDescription());
@@ -46,8 +46,8 @@ public class PostTicketDaoImpl implements PostTicketDao{
                 // increment to the first element of the result set
                 resultSet.next();
                 // extract the id from the result set
-                int ticketId = resultSet.getInt(1);
-                System.out.println("Generated ticket number is: " + ticketId);
+                int ticketid = resultSet.getInt(1);
+                System.out.println("Generated ticket number is: " + ticketid);
             }
             else {
                 System.out.println("Something went wrong when adding the account!");
@@ -59,12 +59,12 @@ public class PostTicketDaoImpl implements PostTicketDao{
     }
 
     @Override
-    public Ticket getByTicketId(int ticketId) {
+    public Ticket getByTicketid(int ticketid) {
         String sql = "select * from postticket where ticketid = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             // set the id using the id that we passed in:
-            preparedStatement.setInt(1, ticketId);
+            preparedStatement.setInt(1, ticketid);
             ResultSet resultSet = preparedStatement.executeQuery();
             // checking, do we have an employee from this query
             if (resultSet.next()) {
@@ -101,13 +101,13 @@ public class PostTicketDaoImpl implements PostTicketDao{
     }
 
     @Override
-    public CustomList<Ticket> getAllByUserId(int userId) {
+    public CustomList<Ticket> getAllByUserid(int userid) {
         // create a list of accounts to store our results:
         CustomList<Ticket> postTickets = new CustomArrayList<Ticket>();
         String sql = "select * from postticket where userid = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(1, userid);
             ResultSet resultSet = preparedStatement.executeQuery();
             // we use a while loop because there are multiple results:
             while(resultSet.next()) {
@@ -126,7 +126,7 @@ public class PostTicketDaoImpl implements PostTicketDao{
         String sql = "delete from postticket where ticketid = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1,postTicket.getTicketId());
+            preparedStatement.setInt(1,postTicket.getTicketid());
             int count = preparedStatement.executeUpdate();
             if(count == 1) {
                 System.out.println("Deletion successful!");
@@ -142,17 +142,53 @@ public class PostTicketDaoImpl implements PostTicketDao{
 
     public Ticket getPostTicket(ResultSet resultSet) {
         try {
-            int ticketId = resultSet.getInt("ticketid");
-            int userId = resultSet.getInt("userid");
+            int ticketid = resultSet.getInt("ticketid");
+            int userid = resultSet.getInt("userid");
             String status = resultSet.getString("status");
             String name = resultSet.getString("name");
             double reimbursement = resultSet.getDouble("reimbursement");
             String description = resultSet.getString("description");
             Timestamp ticketTime = resultSet.getTimestamp("ticketTime");
-            return new Ticket(ticketId, userId, status, name, reimbursement, description, ticketTime);
+            return new Ticket(ticketid, userid, status, name, reimbursement, description, ticketTime);
         } catch(SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void initTables() {
+        // we don't see any ? placeholders because this statement will be the same every time
+        String sql = "DROP TABLE IF EXISTS pastticket; " +
+                "DROP TABLE IF EXISTS postticket;" +
+                "DROP TABLE IF EXISTS employee; CREATE TABLE employee(userid SERIAL PRIMARY KEY, username VARCHAR(50), password varchar(50));" +
+                "create table postticket (ticketid serial primary key, userid int, status varchar, name varchar, reimbursement float, description varchar, ticketTime TimeStamp default current_timestamp," +
+                "foreign key (userid) references employee(userid));";
+
+        // we could add a procedure as well as so we can test it with h2
+        try {
+            // creating a statement instead of preparinf it
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void fillTables() {
+        String sql = "insert into employee(userid, username, password) values (default, 'name 1', 'password 1');\n";
+        sql += "insert into employee(userid, username, password) values (default, 'name 2', 'password 2');\n";
+        sql += "insert into employee(userid, username, password) values (default, 'name 3', 'password 3');";
+        sql += "insert into postticket (ticketid,userid,status,name,reimbursement,description, ticketTime) values (default, 1, 'pending', 'name 1', 1.00, 'test 1', Default);\n";
+        sql += "insert into postticket (ticketid,userid,status,name,reimbursement,description, ticketTime) values (default, 1, 'pending', 'name 2', 2.00, 'test 2', Default);\n";
+        sql += "insert into postticket (ticketid,userid,status,name,reimbursement,description, ticketTime) values (default, 2, 'pending', 'name 3', 3.00, 'test 3', Default);\n";
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
