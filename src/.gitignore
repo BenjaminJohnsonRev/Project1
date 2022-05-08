@@ -1,1 +1,2 @@
 src/main/resources/dbConfig.properties
+src/main/resources/dbConfigTest.properties
