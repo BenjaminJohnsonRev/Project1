@@ -2,14 +2,9 @@ package org.example.dao;
 
 import org.example.customLists.CustomArrayList;
 import org.example.customLists.CustomList;
-import org.example.entity.Manager;
-import org.example.entity.PastTicket;
-import org.example.entity.PostTicket;
 import org.example.entity.Ticket;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PostTicketDaoImpl implements PostTicketDao{
     Connection connection;

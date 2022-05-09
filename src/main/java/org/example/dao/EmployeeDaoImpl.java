@@ -127,7 +127,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             return new Employee(userid, username, password);
         } catch(SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }
