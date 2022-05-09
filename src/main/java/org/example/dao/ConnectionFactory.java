@@ -10,7 +10,6 @@ public class ConnectionFactory {
 
     // make a private constructor, we can't manually instantiate this factory
     private ConnectionFactory() {
-
     }
 
     // this method will return a connection the SQL
