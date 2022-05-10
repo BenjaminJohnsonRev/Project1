@@ -74,7 +74,7 @@ public class AllTicketServletTest extends TestCase{
 
         // create a new book servlet and do the get method:
         try {
-            new PastTicketServlet().doGet(request, response);
+            new AllTicketServlet().doGet(request, response);
         } catch(ServletException ex){
             System.out.println(ex.getLocalizedMessage());
         }
@@ -92,6 +92,6 @@ public class AllTicketServletTest extends TestCase{
         assertTrue(stringWriter.toString().contains("Ticket{ticketid=3, userid=2, status='accepted', name='name 3', reimbursement=3.0, description='test 3', ticketTime="+ticket3.getTicketTime()+"}"));
 
         Ticket ticket4 = postTicketDao.getByTicketid(1);
-        assertTrue(stringWriter.toString().contains("Ticket{ticketid=1, userid=1, status='accepted', name='name 1', reimbursement=1.0, description='test 1', ticketTime="+ticket4.getTicketTime()+"}"));
+        assertTrue(stringWriter.toString().contains("Ticket{ticketid=1, userid=1, status='pending', name='name 1', reimbursement=1.0, description='test 1', ticketTime="+ticket4.getTicketTime()+"}"));
     }
 }

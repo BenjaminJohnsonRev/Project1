@@ -2,9 +2,7 @@ package org.example.dao;
 
 import org.example.customLists.CustomArrayList;
 import org.example.customLists.CustomList;
-import org.example.entity.Manager;
-import org.example.entity.PastTicket;
-import org.example.entity.PostTicket;
+
 import org.example.entity.Ticket;
 
 import java.sql.*;
@@ -57,7 +55,6 @@ public class PastTicketDaoImpl implements PastTicketDao{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override

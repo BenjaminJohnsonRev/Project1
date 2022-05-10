@@ -53,7 +53,6 @@ public class PastTicketServlet extends HttpServlet {
         Ticket postTicket = postTicketDao.getByTicketid(idToPass);
 
         TicketFactory.makeAPastTicket(check,postTicket);
-
 //        try{
 //            ObjectMapper mapper = new ObjectMapper();
 //            Ticket payload = mapper.readValue(req.getReader(), Ticket.class);
