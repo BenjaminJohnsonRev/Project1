@@ -2,12 +2,9 @@ package org.example.dao;
 
 import org.example.customLists.CustomArrayList;
 import org.example.customLists.CustomList;
-
 import org.example.entity.Ticket;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PastTicketDaoImpl implements PastTicketDao{
 
@@ -39,7 +36,7 @@ public class PastTicketDaoImpl implements PastTicketDao{
             // count is how many rows are affected (optimally we would have 1, we are inserting a single account)
             int count = preparedStatement.executeUpdate();
             if(count == 1) {
-                System.out.println("account added successfully!");
+                System.out.println("Ticket added successfully!");
                 // first, we get the result set
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 // increment to the first element of the result set
@@ -55,6 +52,7 @@ public class PastTicketDaoImpl implements PastTicketDao{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
