@@ -25,13 +25,11 @@ public class PostTicketServlet extends HttpServlet {
         try{
             employeeid = Integer.parseInt((req.getParameter("id")));
         } catch(NumberFormatException e){
-            //e.printStackTrace();
             CustomList<Ticket> postTickets = postTicketDao.getAll();
             out.println("Pending Tickets of all employees: ");
             out.print(postTickets);
             return;
         }
-        //todo Rory had services here, so we can replace dao with that if needed
         
         CustomList<Ticket> postTickets = postTicketDao.getAllByUserid(employeeid);
         CustomSort.sort(postTickets);

@@ -160,9 +160,8 @@ public class PostTicketDaoImpl implements PostTicketDao{
                 "create table postticket (ticketid serial primary key, userid int, status varchar, name varchar, reimbursement float, description varchar, ticketTime TimeStamp default current_timestamp," +
                 "foreign key (userid) references employee(userid));";
 
-        // we could add a procedure as well as so we can test it with h2
         try {
-            // creating a statement instead of preparinf it
+            // creating a statement instead of preparing it
             Statement statement = connection.createStatement();
             statement.execute(sql);
         } catch (SQLException e) {

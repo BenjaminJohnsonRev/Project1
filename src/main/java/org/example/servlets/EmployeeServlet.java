@@ -18,17 +18,22 @@ public class EmployeeServlet extends HttpServlet {
     private EmployeeDao employeeDao = DaoFactory.getEmployeeDao();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        PrintWriter out =  resp.getWriter();
         try{
             ObjectMapper mapper = new ObjectMapper();
             Employee payload = mapper.readValue(req.getReader(), Employee.class);
 
-            Login.validateLogin(false, payload.getUsername(), payload.getPassword());
+            boolean check = Login.validateLogin(false, payload.getUsername(), payload.getPassword());
+
+            if(check) {out.println("Welcome, " + payload.getUsername());}
+            else {out.println("Username or password is incorrect");}
+
 
             Employee result = employeeDao.getEmployeeByCredentials(payload.getUsername(),payload.getPassword());
-            PrintWriter out = resp.getWriter();
+            //writing here triggers mockito response during testing
             out.write(result.toString());
 
-            //System.out.println(result);
             resp.setStatus(203);
         }catch (IOException e){
             resp.setStatus(500);

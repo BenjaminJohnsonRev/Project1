@@ -65,9 +65,9 @@ public class ManagerDaoImpl implements ManagerDao {
         // we don't see any ? placeholders because this statement will be the same every time
         String sql = "DROP TABLE IF EXISTS manager; CREATE TABLE manager(username VARCHAR(50), password varchar(50));";
 
-        // we could add a procedure as well as so we can test it with h2
+
         try {
-            // creating a statement instead of preparinf it
+            // creating a statement instead of preparing it
             Statement statement = connection.createStatement();
             statement.execute(sql);
         } catch (SQLException e) {

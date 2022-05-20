@@ -12,4 +12,5 @@ public class ConnectionFactoryTest extends TestCase {
         Connection connection = ConnectionFactory.getConnection();
         assertNotNull(connection);
     }
+
 }

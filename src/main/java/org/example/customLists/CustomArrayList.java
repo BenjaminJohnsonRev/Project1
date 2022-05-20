@@ -64,7 +64,6 @@ public class CustomArrayList<T> implements CustomList {
 
     @Override
     public void add(int i, Object element) {
-        // TODO: Implement this
         CustomArrayList<T> temp = new CustomArrayList<>();
         if(size == elements.length) {
             resize();
