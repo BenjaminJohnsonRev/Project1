@@ -18,34 +18,6 @@ public class Login {
     String username;
     String password;
 
-//    public void login(boolean managerCheck){
-//
-//
-//        // could create MenuFactory
-//        InitialMenu initialMenu = new InitialMenu();
-//        EmployeeMenu employeeMenu = new EmployeeMenu();
-//        ManagerMenu managerMenu = new ManagerMenu();
-//
-//        Scanner scanner = new Scanner(System.in);
-//
-//        System.out.println("Enter your username: ");
-//        String username = scanner.nextLine();
-//        System.out.println("Enter your password: ");
-//        String password = scanner.nextLine();
-//
-//
-//        boolean validLogin = validateLogin(managerCheck, username, password);
-//
-//        if(validLogin){
-//            if(managerCheck){
-//                managerMenu.menu();
-//            } else{
-//                Employee employee = new Employee(username, password);
-//                employeeMenu.menu(employee);
-//            }
-//        }
-//    }
-
     public static boolean validateLogin(boolean managerCheck, String username, String password){
 
         if (managerCheck){

@@ -15,8 +15,8 @@ public class ConnectionFactory {
     // this method will return a connection the SQL
     public static Connection getConnection() {
 
-        //boolean switch for h2 database that we use for testing
-        boolean test = false;
+        //boolean switch for secondary database that we use for testing
+        boolean test = true;
         if(test) {
             // if we don't have a connection yet, we can create one:
             if(connection == null) {

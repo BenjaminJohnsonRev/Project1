@@ -54,7 +54,7 @@ public class EmployeeDaoImplTest extends TestCase {
     }
     @Test
     public void testGetEmployeeByCredentials() {
-        Employee employee = employeeDao.getEmployeeByCredentials("name 1", "password 1");
+        Employee employee = employeeDao.getEmployeeByCredentials("name 6", "password 1");
         assertNotNull(employee);
     }
     @Test
@@ -62,4 +62,5 @@ public class EmployeeDaoImplTest extends TestCase {
         Employee employee = employeeDao.getEmployeeByid(1);
         assertTrue(employee.getUsername().equals("name 1") && employee.getPassword().equals("password 1"));
     }
+
 }

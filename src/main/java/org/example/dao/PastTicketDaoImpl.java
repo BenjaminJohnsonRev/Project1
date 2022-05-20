@@ -63,7 +63,7 @@ public class PastTicketDaoImpl implements PastTicketDao{
             // set the id using the id that we passed in:
             preparedStatement.setInt(1, ticketid);
             ResultSet resultSet = preparedStatement.executeQuery();
-            // checking, do we have a account from this query
+            // checking, do we have an account from this query
             if (resultSet.next()) {
                 // extract out the data
                 Ticket pastTicket = getPastTicket(resultSet);
@@ -144,9 +144,8 @@ public class PastTicketDaoImpl implements PastTicketDao{
                 "create table pastticket (ticketid serial primary key, userid int, status varchar, name varchar, reimbursement float, description varchar, ticketTime TimeStamp default current_timestamp," +
                 "foreign key (userid) references employee(userid));";
 
-        // we could add a procedure as well as so we can test it with h2
         try {
-            // creating a statement instead of preparinf it
+            // creating a statement instead of preparing it
             Statement statement = connection.createStatement();
             statement.execute(sql);
         } catch (SQLException e) {

@@ -74,7 +74,7 @@ public class AllTicketServletTest extends TestCase{
 
         // create a new book servlet and do the get method:
         try {
-            new PastTicketServlet().doGet(request, response);
+            new AllTicketServlet().doGet(request, response);
         } catch(ServletException ex){
             System.out.println(ex.getLocalizedMessage());
         }

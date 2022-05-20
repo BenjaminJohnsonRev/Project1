@@ -20,7 +20,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             // if anything goes wrong here, we will catch the exception:
 
             // we use our connection to prepare a statement to send to the database, pass in the string that we made, as well as a flag
-            // that returns the generated keys (id)
+            // that returns the generated keys
             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             // fill in the values with the data from our employee object:
             preparedStatement.setString(1, employee.getUsername());
@@ -42,6 +42,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeByCredentials(String username, String password) {
+        Employee employee = null;
         String sql = "select * from employee where username = ? AND password = ?;";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -51,14 +52,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             // checking, do we have an employee from this query
             if (resultSet.next()) {
-                Employee employee = getEmployee(resultSet);
+                employee = getEmployee(resultSet);
 
-                return employee;
             }
+            return employee;
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("inside catch");
+            return employee;
         }
-        return null;
     }
 
     @Override
@@ -94,9 +96,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 "create table pastticket (ticketid serial primary key, userid int, status varchar, name varchar, reimbursement float, description varchar, ticketTime TimeStamp default current_timestamp," +
                 "foreign key (userid) references employee(userid));";
 
-        // we could add a procedure as well as so we can test it with h2
         try {
-            // creating a statement instead of preparinf it
+            // creating a statement instead of preparing it
             Statement statement = connection.createStatement();
             statement.execute(sql);
         } catch (SQLException e) {
