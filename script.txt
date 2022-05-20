@@ -1,0 +1,37 @@
+drop table if exists manager;
+drop table if exists pastticket;
+drop table if exists postticket;
+drop table if exists employee;
+
+create table employee (userid serial primary key, username varchar, password varchar);
+create table manager (username varchar, password varchar);
+create table pastticket (ticketid serial primary key, userid int, status varchar, name varchar, reimbursement float, description varchar, ticketTime TimeStamp default current_timestamp,
+foreign key (userid) references employee(userid));
+create table postticket (ticketid serial primary key, userid int, status varchar, name varchar, reimbursement float, description varchar, ticketTime TimeStamp default current_timestamp,
+foreign key (userid) references employee(userid));
+
+insert into employee (userid, username, "password") values (default, 'hmaeda','1234');
+insert into employee (userid, username, "password") values (default, 'benjamin','5678');
+
+insert into manager (username, "password") values ('admin','admin');
+
+insert into postticket (ticketid,userid,status,name,reimbursement,description, ticketTime)
+values (default, 1, 'pending', 'haruya', 10.00, 'live', Default);
+insert into postticket (ticketid,userid,status,name,reimbursement,description, ticketTime)
+values (default, 2, 'pending', 'benjamin', 16.00, 'downtown', Default);
+insert into postticket (ticketid,userid,status,name,reimbursement,description, ticketTime)
+values (default, 2, 'pending', 'benjamin', 17.00, 'uptown', Default);
+
+insert into pastticket (ticketid,userid,status,name,reimbursement,description, ticketTime)
+values (default, 1, 'approved', 'haruya', 12.00,'live2', Default);
+insert into pastticket (ticketid,userid,status,name,reimbursement,description, ticketTime)
+values (default, 2, 'approved', 'benjamin', 15.00,'downtown2', Default);
+insert into pastticket (ticketid,userid,status,name,reimbursement,description, ticketTime)
+values (default, 2, 'denied', 'benjamin', 15.00,'uptown2', Default);
+
+
+
+select * from employee;
+select * from manager;
+select * from pastticket;
+select * from postticket;

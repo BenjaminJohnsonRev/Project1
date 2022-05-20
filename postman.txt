@@ -1,0 +1,36 @@
+GET http://localhost:8080/Project1/employee
+{
+    "username":"benjamin",
+    "password":"5678"
+}
+
+POST http://localhost:8080/Project1/employee
+{
+    "username" : "rory",
+    "password" : "ashes"
+}
+
+POST http://localhost:8080/Project1/postTicket
+{
+    "userid" : 2,
+    "status" : "pending",
+    "name" : "benjamin",
+    "reimbursement" : 44.56,
+    "description" : "15 staplers purchased wholesale"
+}
+
+GET http://localhost:8080/Project1/pastTicket?id=2
+
+GET http://localhost:8080/Project1/postTicket?id=2
+
+GET http://localhost:8080/Project1/allTicket?id=2
+
+GET http://localhost:8080/Project1/manager
+
+GET http://localhost:8080/Project1/postTicket
+
+GET http://localhost:8080/Project1/pastTicket
+
+POST http://localhost:8080/Project1/pastTicket?id=2&check=true
+
+POST http://localhost:8080/Project1/pastTicket?id=1&check=false
